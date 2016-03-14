@@ -14,9 +14,7 @@
  * limitations under the License.
  */
 
- 
 package tech.aroma.thrift.generators;
-
 
 import java.time.Instant;
 import org.slf4j.Logger;
@@ -41,15 +39,17 @@ import static tech.sirwellington.alchemy.generator.NumberGenerators.integers;
 import static tech.sirwellington.alchemy.generator.ObjectGenerators.pojos;
 
 /**
- *
+ * {@linkplain AlchemyGenerator Alchemy Generators} for {@link Event} and {@link EventType}.
+ * 
  * @author SirWellington
  */
 @Internal
 @NonInstantiable
-public final class EventGenerators 
+public final class EventGenerators
 {
-    private final static Logger LOG = LoggerFactory.getLogger(EventGenerators.class);
 
+    private final static Logger LOG = LoggerFactory.getLogger(EventGenerators.class);
+    
     public static AlchemyGenerator<EventType> eventTypes()
     {
         return () ->
@@ -58,7 +58,7 @@ public final class EventGenerators
             
             int random = one(integers(1, 9));
             
-            switch(random)
+            switch (random)
             {
                 case 1:
                     eventType.setApplicationSentMessage(one(pojos(ApplicationSentMessage.class)));
@@ -105,5 +105,5 @@ public final class EventGenerators
             
         };
     }
-    
+
 }
