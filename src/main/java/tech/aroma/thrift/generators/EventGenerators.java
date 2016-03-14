@@ -36,6 +36,7 @@ import tech.sirwellington.alchemy.generator.TimeGenerators;
 import static tech.sirwellington.alchemy.generator.AlchemyGenerator.one;
 import static tech.sirwellington.alchemy.generator.NumberGenerators.integers;
 import static tech.sirwellington.alchemy.generator.ObjectGenerators.pojos;
+import static tech.sirwellington.alchemy.generator.StringGenerators.uuids;
 
 /**
  * {@linkplain AlchemyGenerator Alchemy Generators} for {@link Event} and {@link EventType}.
@@ -104,7 +105,8 @@ public final class EventGenerators
             
             return new Event()
                 .setTimestamp(one(timestamps))
-                .setEventType(one(eventTypes()));
+                .setEventType(one(eventTypes()))
+                .setEventId(one(uuids));
             
         };
     }
