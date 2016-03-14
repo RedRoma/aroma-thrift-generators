@@ -29,7 +29,6 @@ import tech.aroma.thrift.events.EventType;
 import tech.aroma.thrift.events.HealthCheckBackToNormal;
 import tech.aroma.thrift.events.HealthCheckFailed;
 import tech.aroma.thrift.events.OwnerAdded;
-import tech.sirwellington.alchemy.annotations.access.Internal;
 import tech.sirwellington.alchemy.annotations.access.NonInstantiable;
 import tech.sirwellington.alchemy.generator.AlchemyGenerator;
 import tech.sirwellington.alchemy.generator.TimeGenerators;
@@ -43,7 +42,6 @@ import static tech.sirwellington.alchemy.generator.ObjectGenerators.pojos;
  * 
  * @author SirWellington
  */
-@Internal
 @NonInstantiable
 public final class EventGenerators
 {
