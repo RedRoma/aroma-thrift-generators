@@ -106,7 +106,9 @@ public final class EventGenerators
             return new Event()
                 .setTimestamp(one(timestamps))
                 .setEventType(one(eventTypes()))
-                .setEventId(one(uuids));
+                .setEventId(one(uuids))
+                .setUserIdOfActor(one(uuids))
+                .setApplicationId(one(uuids));
             
         };
     }
