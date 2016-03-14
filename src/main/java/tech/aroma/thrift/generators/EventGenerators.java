@@ -47,6 +47,11 @@ public final class EventGenerators
 {
 
     private final static Logger LOG = LoggerFactory.getLogger(EventGenerators.class);
+
+    EventGenerators() throws IllegalAccessException
+    {
+        throw new IllegalAccessException("cannot instantiate");
+    }
     
     public static AlchemyGenerator<EventType> eventTypes()
     {
