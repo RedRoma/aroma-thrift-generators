@@ -25,6 +25,7 @@ import tech.aroma.thrift.Application;
 import tech.aroma.thrift.ProgrammingLanguage;
 import tech.sirwellington.alchemy.generator.AlchemyGenerator;
 import tech.sirwellington.alchemy.test.junit.runners.AlchemyTestRunner;
+import tech.sirwellington.alchemy.test.junit.runners.DontRepeat;
 import tech.sirwellington.alchemy.test.junit.runners.GenerateInteger;
 import tech.sirwellington.alchemy.test.junit.runners.Repeat;
 
@@ -36,6 +37,7 @@ import static tech.sirwellington.alchemy.arguments.assertions.StringAssertions.n
 import static tech.sirwellington.alchemy.arguments.assertions.StringAssertions.validUUID;
 import static tech.sirwellington.alchemy.arguments.assertions.TimeAssertions.inThePast;
 import static tech.sirwellington.alchemy.generator.CollectionGenerators.listOf;
+import static tech.sirwellington.alchemy.test.junit.ThrowableAssertion.assertThrows;
 import static tech.sirwellington.alchemy.test.junit.runners.GenerateInteger.Type.RANGE;
 
 /**
@@ -53,6 +55,13 @@ public class ApplicationGeneratorsTest
     @Before
     public void setUp() throws Exception
     {
+    }
+    
+    @DontRepeat
+    @Test
+    public void testCannotInstantiate()
+    {
+        assertThrows(() -> new ApplicationGenerators());
     }
 
 
