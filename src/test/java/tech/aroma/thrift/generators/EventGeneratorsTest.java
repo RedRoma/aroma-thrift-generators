@@ -24,6 +24,7 @@ import tech.aroma.thrift.events.Event;
 import tech.aroma.thrift.events.EventType;
 import tech.sirwellington.alchemy.generator.AlchemyGenerator;
 import tech.sirwellington.alchemy.test.junit.runners.AlchemyTestRunner;
+import tech.sirwellington.alchemy.test.junit.runners.DontRepeat;
 import tech.sirwellington.alchemy.test.junit.runners.GenerateInteger;
 import tech.sirwellington.alchemy.test.junit.runners.Repeat;
 
@@ -33,8 +34,8 @@ import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
 import static tech.sirwellington.alchemy.generator.CollectionGenerators.listOf;
+import static tech.sirwellington.alchemy.test.junit.ThrowableAssertion.assertThrows;
 import static tech.sirwellington.alchemy.test.junit.runners.GenerateInteger.Type.RANGE;
-
 
 /**
  *
@@ -42,9 +43,9 @@ import static tech.sirwellington.alchemy.test.junit.runners.GenerateInteger.Type
  */
 @Repeat(100)
 @RunWith(AlchemyTestRunner.class)
-public class EventGeneratorsTest 
+public class EventGeneratorsTest
 {
-    
+
     @GenerateInteger(value = RANGE, min = 1, max = 50)
     private int amount;
 
@@ -54,24 +55,29 @@ public class EventGeneratorsTest
         setupData();
     }
 
-
     private void setupData() throws Exception
     {
-        
+
     }
 
+    @DontRepeat
+    @Test
+    public void testCannotInstatiate()
+    {
+        assertThrows(() -> new EventGenerators());
+    }
 
     @Test
     public void testEventTypes()
     {
         AlchemyGenerator<EventType> generator = EventGenerators.eventTypes();
-        
+
         EventType result = generator.get();
         assertEventType(result);
 
         List<EventType> eventTypes = listOf(generator, amount);
         assertThat(eventTypes.size(), is(amount));
-        
+
         eventTypes.forEach(this::assertEventType);
     }
 
@@ -80,10 +86,10 @@ public class EventGeneratorsTest
     {
         AlchemyGenerator<Event> generator = EventGenerators.events();
         assertThat(generator, notNullValue());
-        
+
         Event result = generator.get();
         assertEvent(result);
-        
+
         List<Event> events = listOf(generator, amount);
         assertThat(events.size(), is(amount));
         events.forEach(this::assertEvent);
@@ -99,7 +105,7 @@ public class EventGeneratorsTest
     {
         assertThat(result, notNullValue());
         assertThat(result.eventId, not(isEmptyString()));
-        
+
         assertEventType(result.eventType);
     }
 
