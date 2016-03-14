@@ -7,7 +7,7 @@ Aroma Thrift Generators
 [<p align="center"><img src="https://raw.githubusercontent.com/RedRoma/aroma/develop/Graphics/Logo.png" width="300"></p>](https://github.com/RedRoma/aroma)
 -->
 
-[![Build Status](http://jenkins.sirwellington.tech/job/Aroma%20Thrift/badge/icon)](http://jenkins.sirwellington.tech/job/Aroma%20Thrift/)
+[![Build Status](http://jenkins.sirwellington.tech/view/Aroma/job/Aroma%20Thrift%20Generators/badge/icon)](http://jenkins.sirwellington.tech/view/Aroma/job/Aroma%20Thrift%20Generators/)
 
 This Project contains `AlchemyGenerator` instances for creation of common AromaThrift Objects
 
@@ -51,4 +51,4 @@ To use, simply add the following maven dependency.
 + Thrift 0.9.3 Compiler
 
 # Building
-This project builds with maven. Just run a `mvn clean install` to compile and install to your local maven repository. 
+This project builds with maven. Just run a `mvn clean install` to compile and install to your local maven repository.
