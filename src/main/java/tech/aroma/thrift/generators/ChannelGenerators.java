@@ -30,7 +30,7 @@ import tech.aroma.thrift.channels.SlackUsername;
 import tech.aroma.thrift.endpoint.Endpoint;
 import tech.aroma.thrift.endpoint.HttpThriftEndpoint;
 import tech.aroma.thrift.endpoint.TcpEndpoint;
-import tech.sirwellington.alchemy.annotations.access.Internal;
+import tech.sirwellington.alchemy.annotations.access.NonInstantiable;
 import tech.sirwellington.alchemy.generator.AlchemyGenerator;
 import tech.sirwellington.alchemy.generator.PeopleGenerators;
 
@@ -47,11 +47,15 @@ import static tech.sirwellington.alchemy.generator.StringGenerators.hexadecimalS
  *
  * @author SirWellington
  */
-@Internal
+@NonInstantiable
 public final class ChannelGenerators 
 {
     private final static Logger LOG = LoggerFactory.getLogger(ChannelGenerators.class);
-    
+
+    ChannelGenerators() throws IllegalAccessException
+    {
+        throw new IllegalAccessException("cannot instatiate");
+    }
     
     public static AlchemyGenerator<SlackChannel> slackChannels()
     {
