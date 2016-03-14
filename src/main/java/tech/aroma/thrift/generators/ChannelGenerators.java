@@ -44,7 +44,8 @@ import static tech.sirwellington.alchemy.generator.StringGenerators.alphanumeric
 import static tech.sirwellington.alchemy.generator.StringGenerators.hexadecimalString;
 
 /**
- *
+ * {@linkplain AlchemyGenerator Alchemy Generators} for {@link AromaChannel} types.
+ * 
  * @author SirWellington
  */
 @NonInstantiable
