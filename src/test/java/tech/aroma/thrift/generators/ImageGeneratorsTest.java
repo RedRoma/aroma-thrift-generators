@@ -75,11 +75,29 @@ public class ImageGeneratorsTest
         assertThrows(() -> new ImageGenerators())
             .isInstanceOf(IllegalAccessException.class);
     }
-    
+
     @Test
     public void testProfileImages()
     {
         AlchemyGenerator<Image> generator = ImageGenerators.profileImages();
+        assertThat(generator, notNullValue());
+
+        Image image = generator.get();
+        checkImage(image);
+
+        List<Image> images = listOf(generator, count);
+
+        checkThat(images)
+            .is(nonEmptyList())
+            .is(collectionOfSize(count));
+
+        images.forEach(this::checkImage);
+    }
+
+    @Test
+    public void testAppIcons()
+    {
+        AlchemyGenerator<Image> generator = ImageGenerators.appIcons();
         assertThat(generator, notNullValue());
 
         Image image = generator.get();

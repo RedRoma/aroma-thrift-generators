@@ -28,6 +28,7 @@ import sir.wellington.alchemy.collections.lists.Lists;
 import tech.aroma.thrift.Image;
 import tech.aroma.thrift.ImageType;
 import tech.sirwellington.alchemy.annotations.access.NonInstantiable;
+import tech.sirwellington.alchemy.arguments.FailedAssertionException;
 import tech.sirwellington.alchemy.generator.AlchemyGenerator;
 
 import static tech.sirwellington.alchemy.arguments.Arguments.checkThat;
@@ -48,6 +49,39 @@ public final class ImageGenerators
         throw new IllegalAccessException("cannot instantiate");
     }
 
+    public static AlchemyGenerator<Image> appIcons() 
+    {
+       final List<String> icons = Arrays.asList("App-Icon-1.png",
+                                            "App-Icon-2.png",
+                                            "App-Icon-3.png",
+                                            "App-Icon-4.png",
+                                            "App-Icon-5.png",
+                                            "App-Icon-6.png",
+                                            "App-Icon-7.png");
+       return () ->
+       {
+            Image icon = new Image();
+            
+            String image = Lists.oneOf(icons);
+            URL resource = getResource("images/icons/" + image);
+            
+            byte[] binary;
+            try
+            {
+                binary = toByteArray(resource);
+            }
+            catch(IOException ex)
+            {
+                throw new FailedAssertionException("Could not load Icon: " + image);
+            }
+            
+            icon.setImageType(ImageType.PNG)
+                .setData(binary);
+            
+            return icon;
+       };
+       
+    }
     
     public static AlchemyGenerator<Image> profileImages()
     {
@@ -70,18 +104,21 @@ public final class ImageGenerators
             Image profileImage = new Image();
             
             String image = Lists.oneOf(images);
-            URL resource = getResource("images/" + image);
+            URL resource = getResource("images/profiles/" + image);
+           
             byte[] binary;
             try
             {
                 binary = toByteArray(resource);
-                profileImage.setImageType(ImageType.PNG)
-                    .setData(binary);
             }
             catch (IOException ex)
             {
                 LOG.error("Failed to load Resource {}", resource, ex);
+                throw new FailedAssertionException("Could not load profile image: " + resource);
             }
+            
+            profileImage.setImageType(ImageType.PNG)
+                .setData(binary);
             
             return profileImage;
         };
