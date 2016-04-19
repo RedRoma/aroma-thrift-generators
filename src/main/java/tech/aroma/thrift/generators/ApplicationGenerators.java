@@ -69,6 +69,7 @@ public final class ApplicationGenerators
             return new Application()
                 .setApplicationId(one(uuids))
                 .setName(names().get())
+                .setApplicationIconMediaId(one(uuids))
                 .setProgrammingLanguage(one(languages()))
                 .setFollowers(toSet(listOf(uuids, numberOfFollowers)))
                 .setOwners(toSet(listOf(uuids, numberOfOwners)))

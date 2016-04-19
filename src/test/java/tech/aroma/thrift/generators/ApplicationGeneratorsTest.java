@@ -151,6 +151,7 @@ public class ApplicationGeneratorsTest
         checkThat(app.applicationId).is(validUUID());
         checkThat(app.name).is(nonEmptyString());
         checkThat(app.owners).is(nonEmptySet());
+        checkThat(app.applicationIconMediaId).is(validUUID());
 
     }
     
