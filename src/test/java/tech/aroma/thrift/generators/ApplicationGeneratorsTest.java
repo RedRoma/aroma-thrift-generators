@@ -32,7 +32,9 @@ import tech.sirwellington.alchemy.test.junit.runners.Repeat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 import static tech.sirwellington.alchemy.arguments.Arguments.checkThat;
+import static tech.sirwellington.alchemy.arguments.assertions.Assertions.notNull;
 import static tech.sirwellington.alchemy.arguments.assertions.CollectionAssertions.nonEmptySet;
+import static tech.sirwellington.alchemy.arguments.assertions.NumberAssertions.greaterThan;
 import static tech.sirwellington.alchemy.arguments.assertions.StringAssertions.nonEmptyString;
 import static tech.sirwellington.alchemy.arguments.assertions.StringAssertions.validUUID;
 import static tech.sirwellington.alchemy.arguments.assertions.TimeAssertions.inThePast;
@@ -124,16 +126,46 @@ public class ApplicationGeneratorsTest
         assertThat(result, notNullValue());
     }
 
+
+    @Repeat(10)
+    @Test
+    public void testApplicationsWithIcons()
+    {
+        AlchemyGenerator<Application> generator = ApplicationGenerators.applicationsWithIcons();
+        assertThat(generator, notNullValue());
+        
+        Application app = generator.get();
+        checkAppWithIcon(app);
+        
+        List<Application> apps = listOf(generator, size);
+        assertThat(apps, not(empty()));
+        assertThat(apps.size(), is(size));
+        apps.forEach(this::checkAppWithIcon);
+    }
+
     private void checkApp(Application app)
     {
         assertThat(app, notNullValue());
         checkPastTime(app.timeOfProvisioning);
-        
+
         checkThat(app.applicationId).is(validUUID());
         checkThat(app.name).is(nonEmptyString());
         checkThat(app.owners).is(nonEmptySet());
-        
+
     }
     
-
+    
+    private void checkAppWithIcon(Application app)
+    {
+        checkApp(app);
+        
+        checkThat(app.icon)
+            .is(notNull());
+        
+        checkThat(app.icon.getData())
+            .is(notNull());
+        
+        checkThat(app.icon.getData().length)
+            .is(greaterThan(0));
+    }
 }

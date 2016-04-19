@@ -77,4 +77,15 @@ public final class ApplicationGenerators
             
         };
     }
+    
+    public static AlchemyGenerator<Application> applicationsWithIcons()
+    {
+        return () ->
+        {
+            Application app = applications().get();
+            app.setIcon(one(ImageGenerators.appIcons()));
+            
+            return app;
+        };
+    }
 }

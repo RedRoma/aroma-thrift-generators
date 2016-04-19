@@ -68,6 +68,7 @@ public class UserGeneratorsTest
         assertThrows(() -> new UserGenerators());
     }
 
+    @Repeat(10)
     @Test
     public void testUsersWithProfileImages()
     {
