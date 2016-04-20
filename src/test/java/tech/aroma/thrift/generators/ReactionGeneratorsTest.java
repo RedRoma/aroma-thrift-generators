@@ -26,6 +26,13 @@ import tech.aroma.thrift.reactions.MatcherApplicationIsNot;
 import tech.aroma.thrift.reactions.MatcherBodyContains;
 import tech.aroma.thrift.reactions.MatcherBodyDoesNotContain;
 import tech.aroma.thrift.reactions.MatcherBodyIs;
+import tech.aroma.thrift.reactions.MatcherHostnameContains;
+import tech.aroma.thrift.reactions.MatcherHostnameDoesNotContain;
+import tech.aroma.thrift.reactions.MatcherHostnameIs;
+import tech.aroma.thrift.reactions.MatcherTitleContains;
+import tech.aroma.thrift.reactions.MatcherTitleDoesNotContain;
+import tech.aroma.thrift.reactions.MatcherTitleIs;
+import tech.aroma.thrift.reactions.MatcherTitleIsNot;
 import tech.sirwellington.alchemy.arguments.AlchemyAssertion;
 import tech.sirwellington.alchemy.arguments.FailedAssertionException;
 import tech.sirwellington.alchemy.generator.AlchemyGenerator;
@@ -92,33 +99,82 @@ public class ReactionGeneratorsTest
             checkThat(applicationIs.appId).is(validUuid());
         }
         
-        if(matcher.isSetApplicationIsNot())
+        if (matcher.isSetApplicationIsNot())
         {
             MatcherApplicationIsNot applicationIsNot = matcher.getApplicationIsNot();
             checkThat(applicationIsNot).is(notNull());
             checkThat(applicationIsNot.appId).is(validUuid());
         }
         
-        if(matcher.isSetBodyContains())
+        if (matcher.isSetBodyContains())
         {
             MatcherBodyContains bodyContains = matcher.getBodyContains();
             checkThat(bodyContains).is(notNull());
             checkThat(bodyContains.substring).is(nonEmptyString());
         }
         
-        if(matcher.isSetBodyDoesNotContain())
+        if (matcher.isSetBodyDoesNotContain())
         {
             MatcherBodyDoesNotContain bodyDoesNotContain = matcher.getBodyDoesNotContain();
             checkThat(bodyDoesNotContain).is(notNull());
             checkThat(bodyDoesNotContain.substring).is(nonEmptyString());
             
         }
- 
+        
         if (matcher.isSetBodyIs())
         {
             MatcherBodyIs bodyIs = matcher.getBodyIs();
             checkThat(bodyIs).is(notNull());
             checkThat(bodyIs.expectedBody).is(nonEmptyString());
+        }
+        
+        if (matcher.isSetHostnameContains())
+        {
+            MatcherHostnameContains hostnameContains = matcher.getHostnameContains();
+            checkThat(hostnameContains).is(notNull());
+            checkThat(hostnameContains.substring).is(nonEmptyString());
+        }
+        
+        if (matcher.isSetHostnameDoesNotContain())
+        {
+            MatcherHostnameDoesNotContain hostnameDoesNotContain = matcher.getHostnameDoesNotContain();
+            checkThat(hostnameDoesNotContain).is(notNull());
+            checkThat(hostnameDoesNotContain.substring).is(nonEmptyString());
+        }
+        
+        if (matcher.isSetHostnameIs())
+        {
+            MatcherHostnameIs hostnameIs = matcher.getHostnameIs();
+            checkThat(hostnameIs).is(notNull());
+            checkThat(hostnameIs.expectedHostname).is(nonEmptyString());
+        }
+        
+        if (matcher.isSetTitleContains())
+        {
+            MatcherTitleContains titleContains = matcher.getTitleContains();
+            checkThat(titleContains).is(notNull());
+            checkThat(titleContains.substring).is(nonEmptyString());
+        }
+        
+        if (matcher.isSetTitleDoesNotContain())
+        {
+            MatcherTitleDoesNotContain titleDoesNotContain = matcher.getTitleDoesNotContain();
+            checkThat(titleDoesNotContain).is(notNull());
+            checkThat(titleDoesNotContain.substring).is(nonEmptyString());
+        }
+        
+        if (matcher.isSetTitleIs())
+        {
+            MatcherTitleIs titleIs = matcher.getTitleIs();
+            checkThat(titleIs).is(notNull());
+            checkThat(titleIs.expectedTitle).is(nonEmptyString());
+        }
+        
+        if (matcher.isSetTitleIsNot())
+        {
+            MatcherTitleIsNot titleIsNot = matcher.getTitleIsNot();
+            checkThat(titleIsNot).is(notNull());
+            checkThat(titleIsNot.title).is(nonEmptyString());
         }
     }
 
