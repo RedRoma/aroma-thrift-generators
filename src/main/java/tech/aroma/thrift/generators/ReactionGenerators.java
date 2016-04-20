@@ -20,7 +20,15 @@ package tech.aroma.thrift.generators;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import sir.wellington.alchemy.collections.lists.Lists;
 import tech.aroma.thrift.Urgency;
+import tech.aroma.thrift.reactions.ActionDeleteMessage;
+import tech.aroma.thrift.reactions.ActionForwardToSlackChannel;
+import tech.aroma.thrift.reactions.ActionForwardToSlackUser;
+import tech.aroma.thrift.reactions.ActionForwardToUsers;
+import tech.aroma.thrift.reactions.ActionRespondToCode;
+import tech.aroma.thrift.reactions.ActionSkipInbox;
+import tech.aroma.thrift.reactions.AromaAction;
 import tech.aroma.thrift.reactions.AromaMatcher;
 import tech.aroma.thrift.reactions.MatcherAll;
 import tech.aroma.thrift.reactions.MatcherApplicationIs;
@@ -125,4 +133,43 @@ public final class ReactionGenerators
         };
     }
 
+    
+    public static AlchemyGenerator<AromaAction> actions() 
+    {
+        return () ->
+        {
+            
+            AromaAction action = new AromaAction();
+            
+            String string = one(alphabeticString());
+            String id = one(uuids);
+            
+            int random = one(integers(0, 10));
+            
+            switch(random)
+            {
+                case 0 :
+                    action.setDeleteMessage(new ActionDeleteMessage());
+                    break;
+                case 1 :
+                    action.setForwardToSlackChannel(new ActionForwardToSlackChannel(string));
+                    break;
+                case 2:
+                    action.setForwardToSlackUser(new ActionForwardToSlackUser(string));
+                    break;
+                case 3:
+                    action.setForwardToUsers(new ActionForwardToUsers(Lists.createFrom(id)));
+                    break;
+                case 4:
+                    action.setSkipInbox(new ActionSkipInbox());
+                    break;
+                default :
+                    action.setRespondToCode(new ActionRespondToCode(string));
+                    break;
+            }
+            
+            return action;
+        };
+    }
+    
 }

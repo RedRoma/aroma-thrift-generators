@@ -20,6 +20,13 @@ import java.util.UUID;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import tech.aroma.thrift.reactions.ActionDeleteMessage;
+import tech.aroma.thrift.reactions.ActionForwardToSlackChannel;
+import tech.aroma.thrift.reactions.ActionForwardToSlackUser;
+import tech.aroma.thrift.reactions.ActionForwardToUsers;
+import tech.aroma.thrift.reactions.ActionRespondToCode;
+import tech.aroma.thrift.reactions.ActionSkipInbox;
+import tech.aroma.thrift.reactions.AromaAction;
 import tech.aroma.thrift.reactions.AromaMatcher;
 import tech.aroma.thrift.reactions.MatcherApplicationIs;
 import tech.aroma.thrift.reactions.MatcherApplicationIsNot;
@@ -44,6 +51,7 @@ import static org.junit.Assert.*;
 import static tech.sirwellington.alchemy.arguments.Arguments.checkThat;
 import static tech.sirwellington.alchemy.arguments.assertions.Assertions.notNull;
 import static tech.sirwellington.alchemy.arguments.assertions.BooleanAssertions.trueStatement;
+import static tech.sirwellington.alchemy.arguments.assertions.CollectionAssertions.nonEmptyList;
 import static tech.sirwellington.alchemy.arguments.assertions.StringAssertions.nonEmptyString;
 
 /**
@@ -79,14 +87,26 @@ public class ReactionGeneratorsTest
     {
         AlchemyGenerator<AromaMatcher> instance = ReactionGenerators.matchers();
         assertThat(instance, notNullValue());
-        
+
         AromaMatcher matcher = instance.get();
         assertThat(matcher, notNullValue());
         assertThat(matcher.isSet(), is(true));
-        
+
         checkMatcher(matcher);
     }
-    
+
+    @Test
+    public void testActions()
+    {
+        AlchemyGenerator<AromaAction> instance = ReactionGenerators.actions();
+        assertThat(instance, notNullValue());
+        
+        AromaAction action = instance.get();
+        assertThat(action, notNullValue());
+
+        checkAction(action);
+    }
+
     private void checkMatcher(AromaMatcher matcher)
     {
         checkThat(matcher.isSet())
@@ -192,5 +212,54 @@ public class ReactionGeneratorsTest
             }
         };
     }
+
+    private void checkAction(AromaAction action)
+    {
+        checkThat(action).is(notNull());
+        checkThat(action.isSet()).is(trueStatement());
+        
+        if (action.isSetDeleteMessage())
+        {
+            ActionDeleteMessage deleteMessage = action.getDeleteMessage();
+            checkThat(deleteMessage).is(notNull());
+        }
+        
+        if(action.isSetForwardToSlackChannel())
+        {
+            ActionForwardToSlackChannel forwardToSlackChannel = action.getForwardToSlackChannel();
+            checkThat(forwardToSlackChannel).is(notNull());
+            checkThat(forwardToSlackChannel.slackChannel).is(nonEmptyString());
+        }
+        
+        if(action.isSetForwardToSlackUser())
+        {
+            ActionForwardToSlackUser forwardToSlackUser = action.getForwardToSlackUser();
+            checkThat(forwardToSlackUser).is(notNull());
+            checkThat(forwardToSlackUser.slackUsername).is(nonEmptyString());
+        }
+        
+        if(action.isSetForwardToUsers())
+        {
+            ActionForwardToUsers forwardToUsers = action.getForwardToUsers();
+            checkThat(forwardToUsers).is(notNull());
+            checkThat(forwardToUsers.userIds).is(nonEmptyList());
+            
+            forwardToUsers.userIds.forEach(id -> checkThat(id).is(validUuid()));
+        }
+        
+        if(action.isSetRespondToCode())
+        {
+            ActionRespondToCode respondToCode = action.getRespondToCode();
+            checkThat(respondToCode).is(notNull());
+            checkThat(respondToCode.messageToSend).is(nonEmptyString());
+        }
+        
+        if(action.isSetSkipInbox())
+        {
+            ActionSkipInbox skipInbox = action.getSkipInbox();
+            checkThat(skipInbox).is(notNull());
+        }
+    }
+
     
 }
