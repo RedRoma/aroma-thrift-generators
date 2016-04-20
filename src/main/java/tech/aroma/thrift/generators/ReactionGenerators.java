@@ -18,6 +18,7 @@
 package tech.aroma.thrift.generators;
 
 
+import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sir.wellington.alchemy.collections.lists.Lists;
@@ -44,10 +45,12 @@ import tech.aroma.thrift.reactions.MatcherTitleDoesNotContain;
 import tech.aroma.thrift.reactions.MatcherTitleIs;
 import tech.aroma.thrift.reactions.MatcherTitleIsNot;
 import tech.aroma.thrift.reactions.MatcherUrgencyIs;
+import tech.aroma.thrift.reactions.Reaction;
 import tech.sirwellington.alchemy.annotations.access.NonInstantiable;
 import tech.sirwellington.alchemy.generator.AlchemyGenerator;
 
 import static tech.sirwellington.alchemy.generator.AlchemyGenerator.one;
+import static tech.sirwellington.alchemy.generator.CollectionGenerators.listOf;
 import static tech.sirwellington.alchemy.generator.EnumGenerators.enumValueOf;
 import static tech.sirwellington.alchemy.generator.NumberGenerators.integers;
 import static tech.sirwellington.alchemy.generator.StringGenerators.alphabeticString;
@@ -169,6 +172,21 @@ public final class ReactionGenerators
             }
             
             return action;
+        };
+    }
+    
+    public static AlchemyGenerator<Reaction> reactions()
+    {
+        return () ->
+        {
+            List<AromaMatcher> matchers = listOf(matchers());
+            List<AromaAction> actions = listOf(actions());
+            String name = one(alphabeticString());
+            
+            return new Reaction()
+                .setMatchers(matchers)
+                .setActions(actions)
+                .setName(name);
         };
     }
     

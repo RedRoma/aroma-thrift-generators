@@ -40,6 +40,7 @@ import tech.aroma.thrift.reactions.MatcherTitleContains;
 import tech.aroma.thrift.reactions.MatcherTitleDoesNotContain;
 import tech.aroma.thrift.reactions.MatcherTitleIs;
 import tech.aroma.thrift.reactions.MatcherTitleIsNot;
+import tech.aroma.thrift.reactions.Reaction;
 import tech.sirwellington.alchemy.arguments.AlchemyAssertion;
 import tech.sirwellington.alchemy.arguments.FailedAssertionException;
 import tech.sirwellington.alchemy.generator.AlchemyGenerator;
@@ -105,6 +106,25 @@ public class ReactionGeneratorsTest
         assertThat(action, notNullValue());
 
         checkAction(action);
+    }
+    
+    
+    @Test
+    public void testReactions()
+    {
+        
+        AlchemyGenerator<Reaction> instance = ReactionGenerators.reactions();
+        assertThat(instance, notNullValue());
+        
+        Reaction reaction = instance.get();
+        assertThat(reaction, notNullValue());
+        
+        assertThat(reaction.name, not(isEmptyString()));
+        assertThat(reaction.actions, not(empty()));
+        assertThat(reaction.matchers, not(empty()));
+        
+        reaction.actions.forEach(this::checkAction);
+        reaction.matchers.forEach(this::checkMatcher);
     }
 
     private void checkMatcher(AromaMatcher matcher)
@@ -260,6 +280,7 @@ public class ReactionGeneratorsTest
             checkThat(skipInbox).is(notNull());
         }
     }
+
 
     
 }
