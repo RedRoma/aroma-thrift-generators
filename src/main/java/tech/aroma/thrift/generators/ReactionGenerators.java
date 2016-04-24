@@ -53,6 +53,7 @@ import static tech.sirwellington.alchemy.generator.AlchemyGenerator.one;
 import static tech.sirwellington.alchemy.generator.CollectionGenerators.listOf;
 import static tech.sirwellington.alchemy.generator.EnumGenerators.enumValueOf;
 import static tech.sirwellington.alchemy.generator.NumberGenerators.integers;
+import static tech.sirwellington.alchemy.generator.ObjectGenerators.pojos;
 import static tech.sirwellington.alchemy.generator.StringGenerators.alphabeticString;
 import static tech.sirwellington.alchemy.generator.StringGenerators.uuids;
 
@@ -155,10 +156,10 @@ public final class ReactionGenerators
                     action.setDeleteMessage(new ActionDeleteMessage());
                     break;
                 case 1 :
-                    action.setForwardToSlackChannel(new ActionForwardToSlackChannel(string));
+                    action.setForwardToSlackChannel(pojos(ActionForwardToSlackChannel.class).get());
                     break;
                 case 2:
-                    action.setForwardToSlackUser(new ActionForwardToSlackUser(string));
+                    action.setForwardToSlackUser(pojos(ActionForwardToSlackUser.class).get());
                     break;
                 case 3:
                     action.setForwardToUsers(new ActionForwardToUsers(Lists.createFrom(id)));
