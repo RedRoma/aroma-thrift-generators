@@ -27,7 +27,7 @@ import tech.aroma.thrift.reactions.ActionDontStoreMessage;
 import tech.aroma.thrift.reactions.ActionForwardToSlackChannel;
 import tech.aroma.thrift.reactions.ActionForwardToSlackUser;
 import tech.aroma.thrift.reactions.ActionForwardToUsers;
-import tech.aroma.thrift.reactions.ActionRespondToCode;
+import tech.aroma.thrift.reactions.ActionRespondWithMessage;
 import tech.aroma.thrift.reactions.ActionSkipInbox;
 import tech.aroma.thrift.reactions.AromaAction;
 import tech.aroma.thrift.reactions.AromaMatcher;
@@ -168,7 +168,7 @@ public final class ReactionGenerators
                     action.setSkipInbox(new ActionSkipInbox());
                     break;
                 default :
-                    action.setRespondToCode(new ActionRespondToCode(string));
+                    action.setResponseWithMessage(new ActionRespondWithMessage(string));
                     break;
             }
             

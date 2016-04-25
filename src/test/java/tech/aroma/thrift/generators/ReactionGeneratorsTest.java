@@ -24,7 +24,7 @@ import tech.aroma.thrift.reactions.ActionDontStoreMessage;
 import tech.aroma.thrift.reactions.ActionForwardToSlackChannel;
 import tech.aroma.thrift.reactions.ActionForwardToSlackUser;
 import tech.aroma.thrift.reactions.ActionForwardToUsers;
-import tech.aroma.thrift.reactions.ActionRespondToCode;
+import tech.aroma.thrift.reactions.ActionRespondWithMessage;
 import tech.aroma.thrift.reactions.ActionSkipInbox;
 import tech.aroma.thrift.reactions.AromaAction;
 import tech.aroma.thrift.reactions.AromaMatcher;
@@ -267,11 +267,11 @@ public class ReactionGeneratorsTest
             forwardToUsers.userIds.forEach(id -> checkThat(id).is(validUuid()));
         }
         
-        if(action.isSetRespondToCode())
+        if(action.isSetResponseWithMessage())
         {
-            ActionRespondToCode respondToCode = action.getRespondToCode();
-            checkThat(respondToCode).is(notNull());
-            checkThat(respondToCode.messageToSend).is(nonEmptyString());
+            ActionRespondWithMessage respondWithMessage = action.getResponseWithMessage();
+            checkThat(respondWithMessage).is(notNull());
+            checkThat(respondWithMessage.messageToRespondWith).is(nonEmptyString());
         }
         
         if(action.isSetSkipInbox())
