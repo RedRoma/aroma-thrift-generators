@@ -19,9 +19,11 @@ package tech.aroma.thrift.generators;
 
 
 import java.util.List;
+import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sir.wellington.alchemy.collections.lists.Lists;
+import sir.wellington.alchemy.collections.sets.Sets;
 import tech.aroma.thrift.Urgency;
 import tech.aroma.thrift.reactions.ActionDontStoreMessage;
 import tech.aroma.thrift.reactions.ActionForwardToSlackChannel;
@@ -81,7 +83,10 @@ public final class ReactionGenerators
             int random = one(integers(0, 14));
             String string = one(alphabeticString());
             String id = one(uuids);
-            Urgency urgency = enumValueOf(Urgency.class).get();
+            
+            int numberOfUrgencies = one(integers(1, 4));
+            AlchemyGenerator<Urgency> urgencyGenerator = enumValueOf(Urgency.class);
+            Set<Urgency> urgencies = Sets.toSet(listOf(urgencyGenerator, numberOfUrgencies));
             
             switch(random)
             {
@@ -125,7 +130,7 @@ public final class ReactionGenerators
                     matcher.setTitleIsNot(new MatcherTitleIsNot(id));
                     break;
                 case 13:
-                    matcher.setUrgencyEquals(new MatcherUrgencyIs(urgency));
+                    matcher.setUrgencyEquals(new MatcherUrgencyIs(urgencies));
                     break;
                 default :
                     matcher.setAll(new MatcherAll());
