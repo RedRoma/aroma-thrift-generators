@@ -20,7 +20,7 @@ import java.util.UUID;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import tech.aroma.thrift.reactions.ActionDeleteMessage;
+import tech.aroma.thrift.reactions.ActionDontStoreMessage;
 import tech.aroma.thrift.reactions.ActionForwardToSlackChannel;
 import tech.aroma.thrift.reactions.ActionForwardToSlackUser;
 import tech.aroma.thrift.reactions.ActionForwardToUsers;
@@ -238,10 +238,10 @@ public class ReactionGeneratorsTest
         checkThat(action).is(notNull());
         checkThat(action.isSet()).is(trueStatement());
         
-        if (action.isSetDeleteMessage())
+        if (action.isSetDontStoreMessage())
         {
-            ActionDeleteMessage deleteMessage = action.getDeleteMessage();
-            checkThat(deleteMessage).is(notNull());
+            ActionDontStoreMessage dontStoreMessage = action.getDontStoreMessage();
+            checkThat(dontStoreMessage).is(notNull());
         }
         
         if(action.isSetForwardToSlackChannel())

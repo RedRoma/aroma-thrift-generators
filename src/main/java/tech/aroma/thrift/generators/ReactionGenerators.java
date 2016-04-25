@@ -23,7 +23,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sir.wellington.alchemy.collections.lists.Lists;
 import tech.aroma.thrift.Urgency;
-import tech.aroma.thrift.reactions.ActionDeleteMessage;
+import tech.aroma.thrift.reactions.ActionDontStoreMessage;
 import tech.aroma.thrift.reactions.ActionForwardToSlackChannel;
 import tech.aroma.thrift.reactions.ActionForwardToSlackUser;
 import tech.aroma.thrift.reactions.ActionForwardToUsers;
@@ -153,7 +153,7 @@ public final class ReactionGenerators
             switch(random)
             {
                 case 0 :
-                    action.setDeleteMessage(new ActionDeleteMessage());
+                    action.setDontStoreMessage(new ActionDontStoreMessage());
                     break;
                 case 1 :
                     action.setForwardToSlackChannel(pojos(ActionForwardToSlackChannel.class).get());
