@@ -43,8 +43,9 @@ public final class MessageGenerators
 {
     private final static Logger LOG = LoggerFactory.getLogger(MessageGenerators.class);
 
-    MessageGenerators()
+    MessageGenerators() throws IllegalAccessException
     {
+        throw new IllegalAccessException("Cannot instantiate");
     }
     
     public static AlchemyGenerator<Message> messages()

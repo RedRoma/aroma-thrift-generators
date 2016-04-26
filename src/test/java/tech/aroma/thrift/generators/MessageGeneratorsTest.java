@@ -23,6 +23,7 @@ import org.junit.runner.RunWith;
 import tech.aroma.thrift.Message;
 import tech.sirwellington.alchemy.generator.AlchemyGenerator;
 import tech.sirwellington.alchemy.test.junit.runners.AlchemyTestRunner;
+import tech.sirwellington.alchemy.test.junit.runners.DontRepeat;
 import tech.sirwellington.alchemy.test.junit.runners.Repeat;
 
 import static org.hamcrest.Matchers.*;
@@ -33,6 +34,7 @@ import static tech.sirwellington.alchemy.arguments.Arguments.checkThat;
 import static tech.sirwellington.alchemy.arguments.assertions.StringAssertions.stringWithLengthLessThanOrEqualTo;
 import static tech.sirwellington.alchemy.arguments.assertions.StringAssertions.validUUID;
 import static tech.sirwellington.alchemy.generator.CollectionGenerators.listOf;
+import static tech.sirwellington.alchemy.test.junit.ThrowableAssertion.assertThrows;
 
 /**
  *
@@ -49,6 +51,13 @@ public class MessageGeneratorsTest
 
     }
 
+    @DontRepeat
+    @Test
+    public void testConstructor()
+    {
+        assertThrows(() -> new MessageGenerators());
+    }
+    
     @Test
     public void testMessages()
     {
