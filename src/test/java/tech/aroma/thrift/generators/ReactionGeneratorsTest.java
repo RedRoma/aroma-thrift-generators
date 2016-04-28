@@ -1,18 +1,18 @@
- /*
-  * Copyright 2016 RedRoma.
-  *
-  * Licensed under the Apache License, Version 2.0 (the "License");
-  * you may not use this file except in compliance with the License.
-  * You may obtain a copy of the License at
-  *
-  *      http://www.apache.org/licenses/LICENSE-2.0
-  *
-  * Unless required by applicable law or agreed to in writing, software
-  * distributed under the License is distributed on an "AS IS" BASIS,
-  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  * See the License for the specific language governing permissions and
-  * limitations under the License.
-  */
+/*
+ * Copyright 2016 RedRoma, Inc..
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 package tech.aroma.thrift.generators;
 
@@ -73,7 +73,6 @@ public class ReactionGeneratorsTest
         setupMocks();
     }
     
-    
     private void setupData() throws Exception
     {
         
@@ -89,14 +88,14 @@ public class ReactionGeneratorsTest
     {
         AlchemyGenerator<AromaMatcher> instance = ReactionGenerators.matchers();
         assertThat(instance, notNullValue());
-
+        
         AromaMatcher matcher = instance.get();
         assertThat(matcher, notNullValue());
         assertThat(matcher.isSet(), is(true));
-
+        
         checkMatcher(matcher);
     }
-
+    
     @Test
     public void testActions()
     {
@@ -105,10 +104,9 @@ public class ReactionGeneratorsTest
         
         AromaAction action = instance.get();
         assertThat(action, notNullValue());
-
+        
         checkAction(action);
     }
-    
     
     @Test
     public void testReactions()
@@ -127,7 +125,7 @@ public class ReactionGeneratorsTest
         reaction.actions.forEach(this::checkAction);
         reaction.matchers.forEach(this::checkMatcher);
     }
-
+    
     private void checkMatcher(AromaMatcher matcher)
     {
         checkThat(matcher.isSet())
@@ -218,22 +216,22 @@ public class ReactionGeneratorsTest
             checkThat(titleIsNot.title).is(nonEmptyString());
         }
     }
-
+    
     private AlchemyAssertion<String> validUuid()
     {
         return string ->
-        {
-            try
             {
-                UUID.fromString(string);
-            }
-            catch (Exception ex)
-            {
-                throw new FailedAssertionException("Not a valid UUId: " + string);
-            }
-        };
+                try
+                {
+                    UUID.fromString(string);
+                }
+                catch (Exception ex)
+                {
+                    throw new FailedAssertionException("Not a valid UUId: " + string);
+                }
+            };
     }
-
+    
     private void checkAction(AromaAction action)
     {
         checkThat(action).is(notNull());
@@ -288,7 +286,5 @@ public class ReactionGeneratorsTest
             checkThat(skipInbox).is(notNull());
         }
     }
-
-
     
 }
