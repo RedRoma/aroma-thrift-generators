@@ -245,14 +245,14 @@ public class ReactionGeneratorsTest
             checkThat(dontStoreMessage).is(notNull());
         }
         
-        if(action.isSetForwardToSlackChannel())
+        if (action.isSetForwardToSlackChannel())
         {
             ActionForwardToSlackChannel forwardToSlackChannel = action.getForwardToSlackChannel();
             checkThat(forwardToSlackChannel).is(notNull());
             checkThat(forwardToSlackChannel.slackChannel).is(nonEmptyString());
         }
         
-        if(action.isSetForwardToSlackUser())
+        if (action.isSetForwardToSlackUser())
         {
             ActionForwardToSlackUser forwardToSlackUser = action.getForwardToSlackUser();
             checkThat(forwardToSlackUser).is(notNull());
@@ -266,7 +266,7 @@ public class ReactionGeneratorsTest
             checkThat(forwardToGitter.gitterWebhookUrl).is(nonEmptyString());
         }
         
-        if(action.isSetForwardToUsers())
+        if (action.isSetForwardToUsers())
         {
             ActionForwardToUsers forwardToUsers = action.getForwardToUsers();
             checkThat(forwardToUsers).is(notNull());
@@ -275,14 +275,14 @@ public class ReactionGeneratorsTest
             forwardToUsers.userIds.forEach(id -> checkThat(id).is(validUuid()));
         }
         
-        if(action.isSetResponseWithMessage())
+        if (action.isSetResponseWithMessage())
         {
             ActionRespondWithMessage respondWithMessage = action.getResponseWithMessage();
             checkThat(respondWithMessage).is(notNull());
             checkThat(respondWithMessage.messageToRespondWith).is(nonEmptyString());
         }
         
-        if(action.isSetSkipInbox())
+        if (action.isSetSkipInbox())
         {
             ActionSkipInbox skipInbox = action.getSkipInbox();
             checkThat(skipInbox).is(notNull());
