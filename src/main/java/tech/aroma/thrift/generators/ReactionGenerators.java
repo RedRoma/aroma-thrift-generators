@@ -26,6 +26,7 @@ import sir.wellington.alchemy.collections.lists.Lists;
 import sir.wellington.alchemy.collections.sets.Sets;
 import tech.aroma.thrift.Urgency;
 import tech.aroma.thrift.reactions.ActionDontStoreMessage;
+import tech.aroma.thrift.reactions.ActionForwardToGitter;
 import tech.aroma.thrift.reactions.ActionForwardToSlackChannel;
 import tech.aroma.thrift.reactions.ActionForwardToSlackUser;
 import tech.aroma.thrift.reactions.ActionForwardToUsers;
@@ -50,6 +51,7 @@ import tech.aroma.thrift.reactions.MatcherUrgencyIs;
 import tech.aroma.thrift.reactions.Reaction;
 import tech.sirwellington.alchemy.annotations.access.NonInstantiable;
 import tech.sirwellington.alchemy.generator.AlchemyGenerator;
+import tech.sirwellington.alchemy.generator.NetworkGenerators;
 
 import static tech.sirwellington.alchemy.generator.AlchemyGenerator.one;
 import static tech.sirwellington.alchemy.generator.CollectionGenerators.listOf;
@@ -151,6 +153,7 @@ public final class ReactionGenerators
             AromaAction action = new AromaAction();
             
             String string = one(alphabeticString());
+            String url = one(NetworkGenerators.httpUrls()).toString();
             String id = one(uuids);
             
             int random = one(integers(0, 10));
@@ -171,6 +174,9 @@ public final class ReactionGenerators
                     break;
                 case 4:
                     action.setSkipInbox(new ActionSkipInbox());
+                    break;
+                case 5:
+                    action.setForwardToGitter(pojos(ActionForwardToGitter.class).get());
                     break;
                 default :
                     action.setResponseWithMessage(new ActionRespondWithMessage(string));

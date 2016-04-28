@@ -21,6 +21,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import tech.aroma.thrift.reactions.ActionDontStoreMessage;
+import tech.aroma.thrift.reactions.ActionForwardToGitter;
 import tech.aroma.thrift.reactions.ActionForwardToSlackChannel;
 import tech.aroma.thrift.reactions.ActionForwardToSlackUser;
 import tech.aroma.thrift.reactions.ActionForwardToUsers;
@@ -256,6 +257,13 @@ public class ReactionGeneratorsTest
             ActionForwardToSlackUser forwardToSlackUser = action.getForwardToSlackUser();
             checkThat(forwardToSlackUser).is(notNull());
             checkThat(forwardToSlackUser.slackUsername).is(nonEmptyString());
+        }
+        
+        if (action.isSetForwardToGitter())
+        {
+            ActionForwardToGitter forwardToGitter = action.getForwardToGitter();
+            checkThat(forwardToGitter).is(notNull());
+            checkThat(forwardToGitter.gitterWebhookUrl).is(nonEmptyString());
         }
         
         if(action.isSetForwardToUsers())
