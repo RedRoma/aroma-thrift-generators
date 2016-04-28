@@ -176,7 +176,7 @@ public final class ReactionGenerators
                     action.setSkipInbox(new ActionSkipInbox());
                     break;
                 case 5:
-                    action.setForwardToGitter(pojos(ActionForwardToGitter.class).get());
+                    action.setForwardToGitter(new ActionForwardToGitter(url));
                     break;
                 default :
                     action.setResponseWithMessage(new ActionRespondWithMessage(string));
