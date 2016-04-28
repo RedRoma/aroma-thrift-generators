@@ -55,6 +55,7 @@ public final class MessageGenerators
             return new Message()
                 .setTitle(one(alphabeticString(MAX_TITLE_LENGTH)))
                 .setBody(one(alphabeticString(MAX_CHARACTERS_IN_BODY)))
+                .setDeviceName(one(alphabeticString(12)))
                 .setHostname(one(alphanumericString()))
                 .setUrgency(one(enumValueOf(Urgency.class)))
                 .setTimeMessageReceived(one(pastDates()).getTime())
