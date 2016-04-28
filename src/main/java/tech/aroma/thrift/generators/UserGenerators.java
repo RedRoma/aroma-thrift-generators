@@ -1,6 +1,5 @@
-
 /*
- * Copyright 2016 RedRoma.
+ * Copyright 2016 RedRoma, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,24 +36,24 @@ import static tech.sirwellington.alchemy.generator.StringGenerators.uuids;
 @NonInstantiable
 public final class UserGenerators
 {
-    
+
     private final static Logger LOG = LoggerFactory.getLogger(UserGenerators.class);
-    
+
     UserGenerators() throws IllegalAccessException
     {
         throw new IllegalAccessException("cannot instantiate");
     }
-    
+
     public static AlchemyGenerator<User> usersWithProfileImages()
     {
         return () ->
         {
             return users().get()
                 .setProfileImage(one(profileImages()));
-            
+
         };
     }
-    
+
     public static AlchemyGenerator<User> users()
     {
         return () ->
@@ -68,5 +67,5 @@ public final class UserGenerators
                 .setLastName(one(names()));
         };
     }
-    
+
 }

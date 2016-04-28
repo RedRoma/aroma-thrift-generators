@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Aroma Tech.
+ * Copyright 2016 RedRoma, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,7 +40,7 @@ import static tech.sirwellington.alchemy.generator.StringGenerators.uuids;
 
 /**
  * {@linkplain AlchemyGenerator Alchemy Generators} for {@link Event} and {@link EventType}.
- * 
+ *
  * @author SirWellington
  */
 @NonInstantiable
@@ -53,15 +53,15 @@ public final class EventGenerators
     {
         throw new IllegalAccessException("cannot instantiate");
     }
-    
+
     public static AlchemyGenerator<EventType> eventTypes()
     {
         return () ->
         {
             EventType eventType = new EventType();
-            
+
             int random = one(integers(1, 9));
-            
+
             switch (random)
             {
                 case 1:
@@ -91,25 +91,25 @@ public final class EventGenerators
                 default:
                     eventType.setApplicationSentMessage(one(pojos(ApplicationSentMessage.class)));
             }
-            
+
             return eventType;
         };
     }
-    
+
     public static AlchemyGenerator<Event> events()
     {
         return () ->
         {
             AlchemyGenerator<Instant> pastInstants = TimeGenerators.pastInstants();
             AlchemyGenerator<Long> timestamps = () -> pastInstants.get().toEpochMilli();
-            
+
             return new Event()
                 .setTimestamp(one(timestamps))
                 .setEventType(one(eventTypes()))
                 .setEventId(one(uuids))
                 .setUserIdOfActor(one(uuids))
                 .setApplicationId(one(uuids));
-            
+
         };
     }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Aroma Tech.
+ * Copyright 2016 RedRoma, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,14 +40,14 @@ import static tech.sirwellington.alchemy.generator.TimeGenerators.futureInstants
 @NonInstantiable
 public final class TokenGenerators
 {
-    
+
     private final static Logger LOG = LoggerFactory.getLogger(TokenGenerators.class);
-    
+
     TokenGenerators() throws IllegalAccessException
     {
         throw new IllegalAccessException("cannot instatiate");
     }
-    
+
     public static AlchemyGenerator<AuthenticationToken> authenticationTokens()
     {
         return () ->
@@ -62,7 +62,7 @@ public final class TokenGenerators
                 .setTimeOfExpiration(futureInstants().get().toEpochMilli());
         };
     }
-    
+
     public static AlchemyGenerator<ApplicationToken> applicationTokens()
     {
         return () ->
@@ -75,7 +75,7 @@ public final class TokenGenerators
                 .setTimeOfExpiration(futureInstants().get().toEpochMilli());
         };
     }
-    
+
     public static AlchemyGenerator<UserToken> userTokens()
     {
         return () ->
@@ -87,5 +87,5 @@ public final class TokenGenerators
                 .setTimeOfExpiration(futureInstants().get().toEpochMilli());
         };
     }
-    
+
 }
