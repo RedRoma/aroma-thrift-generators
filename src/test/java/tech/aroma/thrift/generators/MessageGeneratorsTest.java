@@ -76,6 +76,7 @@ public class MessageGeneratorsTest
         assertThat(message, notNullValue());
         assertThat(message.title, not(isEmptyOrNullString()));
         assertThat(message.body, not(isEmptyOrNullString()));
+        assertThat(message.deviceName, not(isEmptyOrNullString()));
         assertThat(message.hostname, not(isEmptyOrNullString()));
         assertThat(message.applicationId, not(isEmptyOrNullString()));
         assertThat(message.messageId, not(isEmptyOrNullString()));
