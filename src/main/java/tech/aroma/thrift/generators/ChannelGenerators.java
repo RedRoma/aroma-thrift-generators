@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Aroma Tech.
+ * Copyright 2016 RedRoma, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
- 
+
 package tech.aroma.thrift.generators;
 
 
@@ -45,11 +45,11 @@ import static tech.sirwellington.alchemy.generator.StringGenerators.hexadecimalS
 
 /**
  * {@linkplain AlchemyGenerator Alchemy Generators} for {@link AromaChannel} types.
- * 
+ *
  * @author SirWellington
  */
 @NonInstantiable
-public final class ChannelGenerators 
+public final class ChannelGenerators
 {
     private final static Logger LOG = LoggerFactory.getLogger(ChannelGenerators.class);
 
@@ -57,7 +57,7 @@ public final class ChannelGenerators
     {
         throw new IllegalAccessException("cannot instatiate");
     }
-    
+
     public static AlchemyGenerator<SlackChannel> slackChannels()
     {
         return () ->
@@ -68,7 +68,7 @@ public final class ChannelGenerators
               .setSlackToken(one(hexadecimalString(10)));
         };
     }
-    
+
     public static AlchemyGenerator<SlackUsername> slackUsernames()
     {
         return () ->
@@ -79,7 +79,7 @@ public final class ChannelGenerators
               .setUsername(one(alphanumericString()));
         };
     }
-    
+
     public static AlchemyGenerator<Email> emails()
     {
         return () ->
@@ -89,35 +89,35 @@ public final class ChannelGenerators
                 .setSubject(one(alphabeticString()));
         };
     }
-    
+
     public static AlchemyGenerator<Endpoint> endpoints()
     {
         return () ->
         {
             boolean decider = one(booleans());
-            
+
             Endpoint endpoint = new Endpoint();
-            
+
             if(decider)
             {
                 TcpEndpoint tcp = new TcpEndpoint()
                 .setHostname(one(alphanumericString()))
                 .setPort(one(integers(80, 8080)));
-                
+
                 endpoint.setTcp(tcp);
             }
             else
             {
                 HttpThriftEndpoint http = new HttpThriftEndpoint()
                 .setUrl("http://" + one(popularEmailDomains()));
-                
+
                 endpoint.setHttpThrift(http);
             }
-            
+
             return endpoint;
         };
-    }  
-    
+    }
+
     public static AlchemyGenerator<CustomChannel> customChannels()
     {
         return () ->
@@ -126,12 +126,12 @@ public final class ChannelGenerators
                 .setEndpoint(one(endpoints()));
         };
     }
-    
+
     public static AlchemyGenerator<IOSDevice> iosDevices()
     {
         return pojos(IOSDevice.class);
     }
-    
+
     public static AlchemyGenerator<AndroidDevice> androidDevices()
     {
         return pojos(AndroidDevice.class);
@@ -139,13 +139,13 @@ public final class ChannelGenerators
 
     public static AlchemyGenerator<AromaChannel> channels()
     {
-        
+
         return () ->
         {
             AromaChannel channel = new AromaChannel();
-            
+
             int number = one(integers(1, 8));
-            
+
             switch(number)
             {
                 case 1:
@@ -170,10 +170,10 @@ public final class ChannelGenerators
                     channel.setSlackChannel(one(slackChannels()));
                     break;
             }
-            
+
             return channel;
         };
-            
+
     }
-    
+
 }
