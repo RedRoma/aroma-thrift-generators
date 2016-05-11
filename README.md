@@ -9,7 +9,7 @@ Aroma Thrift Generators
 
 [![Build Status](http://jenkins.redroma.tech/view/Aroma/job/Aroma%20Thrift%20Generators/badge/icon)](http://jenkins.redroma.tech/view/Aroma/job/Aroma%20Thrift%20Generators/)
 
-This Project contains `AlchemyGenerator` instances for creation of common AromaThrift Objects
+This Project contains `AlchemyGenerator` instances for creation of common [AromaThrift](https://github.com/RedRoma/aroma-thrift/) Objects
 
 # Download
 
@@ -38,7 +38,7 @@ To use, simply add the following maven dependency.
 <dependency>
 	<groupId>tech.aroma</groupId>
 	<artifactId>aroma-thrift-generators</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.1-SNAPSHOT</version>
 </dependency>
 ```
 
