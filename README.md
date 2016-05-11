@@ -9,7 +9,7 @@ Aroma Thrift Generators
 
 [![Build Status](http://jenkins.redroma.tech/view/Aroma/job/Aroma%20Thrift%20Generators/badge/icon)](http://jenkins.redroma.tech/view/Aroma/job/Aroma%20Thrift%20Generators/)
 
-This Project contains `AlchemyGenerator` instances for creation of common AromaThrift Objects
+This Project contains `AlchemyGenerator` instances for creation of common [AromaThrift](https://github.com/RedRoma/aroma-thrift/) Objects
 
 # Download
 
