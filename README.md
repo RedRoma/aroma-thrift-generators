@@ -1,15 +1,15 @@
-Aroma Thrift
+Aroma Thrift Generators
 ==============================================
 
-[<img src="https://raw.githubusercontent.com/RedRoma/aroma/develop/Graphics/Logo.png" width="300">](https://github.com/RedRoma/aroma)
+[<img src="https://raw.githubusercontent.com/RedRoma/aroma/develop/Graphics/Logo.png" width="300">](http://aroma.redroma.tech/)
 
 <!--
 [<p align="center"><img src="https://raw.githubusercontent.com/RedRoma/aroma/develop/Graphics/Logo.png" width="300"></p>](https://github.com/RedRoma/aroma)
 -->
 
-[![Build Status](http://jenkins.sirwellington.tech/job/Aroma%20Thrift/badge/icon)](http://jenkins.sirwellington.tech/job/Aroma%20Thrift/)
+[![Build Status](http://jenkins.redroma.tech/view/Aroma/job/Aroma%20Thrift%20Generators/badge/icon)](http://jenkins.redroma.tech/view/Aroma/job/Aroma%20Thrift%20Generators/)
 
-The Model and Service Definitions for Aroma defined in Thrift
+This Project contains `AlchemyGenerator` instances for creation of common [AromaThrift](https://github.com/RedRoma/aroma-thrift/) Objects
 
 # Download
 
@@ -19,8 +19,8 @@ To use, simply add the following maven dependency.
 ```xml
 <dependency>
 	<groupId>tech.aroma</groupId>
-	<artifactId>aroma-thrift</artifactId>
-	<version>1.7</version>
+	<artifactId>aroma-thrift-generators</artifactId>
+	<version>1.0</version>
 </dependency>
 ```
 
@@ -37,12 +37,12 @@ To use, simply add the following maven dependency.
 ```xml
 <dependency>
 	<groupId>tech.aroma</groupId>
-	<artifactId>aroma-thrift</artifactId>
-	<version>1.8-SNAPSHOT</version>
+	<artifactId>aroma-thrift-generators</artifactId>
+	<version>1.1-SNAPSHOT</version>
 </dependency>
 ```
 
-# [Javadocs](http://www.javadoc.io/doc/tech.aroma/aroma-thrift/)
+# [Javadocs](http://www.javadoc.io/doc/tech.aroma/aroma-thrift-generators/)
 
 # Requirements
 
@@ -51,8 +51,4 @@ To use, simply add the following maven dependency.
 + Thrift 0.9.3 Compiler
 
 # Building
-This project builds with maven. Just run a `mvn clean install` to compile and install to your local maven repository. As long as `thrift` is on your `PATH` it should build just fine.
-
-# Release Notes
-
-> Coming Soon
+This project builds with maven. Just run a `mvn clean install` to compile and install to your local maven repository.
