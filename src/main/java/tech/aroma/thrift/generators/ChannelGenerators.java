@@ -154,15 +154,15 @@ public final class ChannelGenerators
             
             int seed = randomSeeds.get();
             
-            switch(seed)
+            switch (seed)
             {
-                case 1 : 
+                case 1:
                     device.setAndroidDevice(one(androidDevices()));
                     break;
-                case 2 :
+                case 2:
                     device.setIosDevice(one(iosDevices()));
                     break;
-                case 3 :
+                case 3:
                     device.setWindowsPhoneDevice(one(windowsPhoneDevices()));
                     break;
                 default:
@@ -173,8 +173,7 @@ public final class ChannelGenerators
             return device;
         };
     }
-        
-
+    
     public static AlchemyGenerator<AromaChannel> channels()
     {
 
