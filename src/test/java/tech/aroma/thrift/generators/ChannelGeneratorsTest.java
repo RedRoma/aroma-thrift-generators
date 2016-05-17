@@ -26,8 +26,10 @@ import tech.aroma.thrift.channels.AromaChannel;
 import tech.aroma.thrift.channels.CustomChannel;
 import tech.aroma.thrift.channels.Email;
 import tech.aroma.thrift.channels.IOSDevice;
+import tech.aroma.thrift.channels.MobileDevice;
 import tech.aroma.thrift.channels.SlackChannel;
 import tech.aroma.thrift.channels.SlackUsername;
+import tech.aroma.thrift.channels.WindowsPhoneDevice;
 import tech.aroma.thrift.endpoint.Endpoint;
 import tech.sirwellington.alchemy.generator.AlchemyGenerator;
 import tech.sirwellington.alchemy.test.junit.runners.AlchemyTestRunner;
@@ -171,6 +173,48 @@ public class ChannelGeneratorsTest
         assertThat(devices.size(), is(size));
         devices.forEach(this::assertAndroidDevice);
     }
+    
+    
+    @Test
+    public void testWindowsPhoneDevices()
+    {
+        AlchemyGenerator<WindowsPhoneDevice> generator = ChannelGenerators.windowsPhoneDevices();
+        assertThat(generator, notNullValue());
+        
+        WindowsPhoneDevice result = generator.get();
+        assertWindowsPhoneDevice(result);
+        
+        List<WindowsPhoneDevice> devices = listOf(generator, size);
+        assertThat(devices, not(empty()));
+        assertThat(devices.size(), is(size));
+        devices.forEach(this::assertWindowsPhoneDevice);
+    }
+
+    @Test
+    public void testMobileDevices()
+    {
+        AlchemyGenerator<MobileDevice> generator = ChannelGenerators.mobileDevices();
+        assertThat(generator, notNullValue());
+
+        MobileDevice result = generator.get();
+        assertThat(result, notNullValue());
+        assertThat(result.isSet(), is(true));
+
+        if (result.isSetAndroidDevice())
+        {
+            assertAndroidDevice(result.getAndroidDevice());
+        }
+
+        if (result.isSetIosDevice())
+        {
+            assertIosDevice(result.getIosDevice());
+        }
+
+        if (result.isSetWindowsPhoneDevice())
+        {
+            assertWindowsPhoneDevice(result.getWindowsPhoneDevice());
+        }
+    }
 
     @Test
     public void testChannels()
@@ -233,7 +277,7 @@ public class ChannelGeneratorsTest
     private void assertAndroidDevice(AndroidDevice device)
     {
         assertThat(device, notNullValue());
-        assertThat(device.deviceId, not(isEmptyString()));
+        assertThat(device.registrationId, not(isEmptyString()));
     }
 
     private void assertChannel(AromaChannel channel)
@@ -269,6 +313,11 @@ public class ChannelGeneratorsTest
         {
             fail("AromaChannel is not actually set!: " + channel);
         }
+    }
+
+    private void assertWindowsPhoneDevice(WindowsPhoneDevice windowsPhoneDevice)
+    {
+        assertThat(windowsPhoneDevice, notNullValue());
     }
 
 }
