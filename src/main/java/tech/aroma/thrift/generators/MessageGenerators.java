@@ -60,6 +60,7 @@ public final class MessageGenerators
                 .setUrgency(one(enumValueOf(Urgency.class)))
                 .setTimeMessageReceived(one(pastDates()).getTime())
                 .setApplicationId(one(uuids))
+                .setApplicationName(one(alphabeticString(15)))
                 .setMessageId(one(uuids))
                 ;
         };
