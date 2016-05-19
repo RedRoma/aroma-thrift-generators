@@ -18,6 +18,7 @@ package tech.aroma.thrift.generators;
 
 import java.util.List;
 import junit.framework.AssertionFailedError;
+import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -271,7 +272,7 @@ public class ChannelGeneratorsTest
     private void assertIosDevice(IOSDevice device)
     {
         assertThat(device, notNullValue());
-        assertThat(device.deviceToken, not(isEmptyString()));
+        assertThat(device.getDeviceToken().length, Matchers.greaterThan(0));
     }
 
     private void assertAndroidDevice(AndroidDevice device)
