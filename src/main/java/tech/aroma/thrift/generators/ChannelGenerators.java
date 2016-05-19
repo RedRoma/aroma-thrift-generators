@@ -25,8 +25,10 @@ import tech.aroma.thrift.channels.AromaChannel;
 import tech.aroma.thrift.channels.CustomChannel;
 import tech.aroma.thrift.channels.Email;
 import tech.aroma.thrift.channels.IOSDevice;
+import tech.aroma.thrift.channels.MobileDevice;
 import tech.aroma.thrift.channels.SlackChannel;
 import tech.aroma.thrift.channels.SlackUsername;
+import tech.aroma.thrift.channels.WindowsPhoneDevice;
 import tech.aroma.thrift.endpoint.Endpoint;
 import tech.aroma.thrift.endpoint.HttpThriftEndpoint;
 import tech.aroma.thrift.endpoint.TcpEndpoint;
@@ -136,7 +138,42 @@ public final class ChannelGenerators
     {
         return pojos(AndroidDevice.class);
     }
-
+    
+    public static AlchemyGenerator<WindowsPhoneDevice> windowsPhoneDevices()
+    {
+        return () -> new WindowsPhoneDevice();
+    }
+    
+    public static AlchemyGenerator<MobileDevice> mobileDevices()
+    {
+        AlchemyGenerator<Integer> randomSeeds = integers(1, 4);
+        
+        return () ->
+        {
+            MobileDevice device = new MobileDevice();
+            
+            int seed = randomSeeds.get();
+            
+            switch (seed)
+            {
+                case 1:
+                    device.setAndroidDevice(one(androidDevices()));
+                    break;
+                case 2:
+                    device.setIosDevice(one(iosDevices()));
+                    break;
+                case 3:
+                    device.setWindowsPhoneDevice(one(windowsPhoneDevices()));
+                    break;
+                default:
+                    device.setIosDevice(one(iosDevices()));
+                    break;
+            }
+            
+            return device;
+        };
+    }
+    
     public static AlchemyGenerator<AromaChannel> channels()
     {
 
