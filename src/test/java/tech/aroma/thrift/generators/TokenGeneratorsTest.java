@@ -23,6 +23,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import tech.aroma.thrift.authentication.ApplicationToken;
 import tech.aroma.thrift.authentication.AuthenticationToken;
+import tech.aroma.thrift.authentication.TokenStatus;
 import tech.aroma.thrift.authentication.UserToken;
 import tech.sirwellington.alchemy.generator.AlchemyGenerator;
 import tech.sirwellington.alchemy.test.junit.runners.AlchemyTestRunner;
@@ -35,6 +36,8 @@ import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
 import static sir.wellington.alchemy.collections.sets.Sets.toSet;
 import static tech.sirwellington.alchemy.arguments.Arguments.checkThat;
+import static tech.sirwellington.alchemy.arguments.assertions.Assertions.equalTo;
+import static tech.sirwellington.alchemy.arguments.assertions.Assertions.notNull;
 import static tech.sirwellington.alchemy.arguments.assertions.StringAssertions.nonEmptyString;
 import static tech.sirwellington.alchemy.arguments.assertions.StringAssertions.validUUID;
 import static tech.sirwellington.alchemy.arguments.assertions.TimeAssertions.inTheFuture;
@@ -115,36 +118,46 @@ public class TokenGeneratorsTest
         assertThat(token, notNullValue());
         checkThat(token.tokenId, token.ownerId, token.organizationId)
             .are(validUUID());
-        
+
         checkThat(token.ownerName, token.organizationName)
             .are(nonEmptyString());
-        
+
         checkThat(Instant.ofEpochMilli(token.timeOfExpiration))
             .is(inTheFuture());
+
+        checkThat(token.status)
+            .is(notNull())
+            .is(equalTo(TokenStatus.ACTIVE));
     }
 
     private void assertToken(ApplicationToken token)
     {
         assertThat(token, notNullValue());
-        
+
         checkThat(token.tokenId, token.applicationId)
             .are(validUUID());
-        
+
         checkThat(Instant.ofEpochMilli(token.timeOfExpiration))
             .is(inTheFuture());
 
+        checkThat(token.status)
+            .is(notNull())
+            .is(equalTo(TokenStatus.ACTIVE));
     }
 
     private void assertToken(UserToken token)
     {
         assertThat(token, notNullValue());
-        
+
         checkThat(token.tokenId, token.userId)
             .are(validUUID());
-        
+
         checkThat(Instant.ofEpochMilli(token.timeOfExpiration))
             .is(inTheFuture());
 
+        checkThat(token.status)
+            .is(notNull())
+            .is(equalTo(TokenStatus.ACTIVE));
     }
 
 }

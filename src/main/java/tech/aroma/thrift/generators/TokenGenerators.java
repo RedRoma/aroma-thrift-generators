@@ -20,6 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import tech.aroma.thrift.authentication.ApplicationToken;
 import tech.aroma.thrift.authentication.AuthenticationToken;
+import tech.aroma.thrift.authentication.TokenStatus;
 import tech.aroma.thrift.authentication.TokenType;
 import tech.aroma.thrift.authentication.UserToken;
 import tech.sirwellington.alchemy.annotations.access.NonInstantiable;
@@ -59,6 +60,7 @@ public final class TokenGenerators
                 .setOrganizationId(one(uuids))
                 .setOrganizationName(one(alphabeticString()))
                 .setTokenType(enumValueOf(TokenType.class).get())
+                .setStatus(TokenStatus.ACTIVE)
                 .setTimeOfExpiration(futureInstants().get().toEpochMilli());
         };
     }
@@ -72,6 +74,7 @@ public final class TokenGenerators
                 .setApplicationName(one(alphabeticString()))
                 .setOrganization(one(alphabeticString()))
                 .setTokenId(one(uuids))
+                .setStatus(TokenStatus.ACTIVE)
                 .setTimeOfExpiration(futureInstants().get().toEpochMilli());
         };
     }
@@ -84,6 +87,7 @@ public final class TokenGenerators
                 .setUserId(one(uuids))
                 .setTokenId(one(uuids))
                 .setOrganization(one(alphabeticString()))
+                .setStatus(TokenStatus.ACTIVE)
                 .setTimeOfExpiration(futureInstants().get().toEpochMilli());
         };
     }
