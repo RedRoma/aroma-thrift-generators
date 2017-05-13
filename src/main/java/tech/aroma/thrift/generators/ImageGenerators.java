@@ -22,6 +22,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sir.wellington.alchemy.collections.lists.Lists;
@@ -35,7 +36,6 @@ import static tech.sirwellington.alchemy.arguments.Arguments.checkThat;
 import static tech.sirwellington.alchemy.arguments.assertions.Assertions.notNull;
 
 /**
- *
  * @author SirWellington
  */
 @NonInstantiable
@@ -49,40 +49,40 @@ public final class ImageGenerators
         throw new IllegalAccessException("cannot instantiate");
     }
 
-    public static AlchemyGenerator<Image> appIcons() 
+    public static AlchemyGenerator<Image> appIcons()
     {
-       final List<String> icons = Arrays.asList("App-Icon-1.png",
-                                            "App-Icon-2.png",
-                                            "App-Icon-3.png",
-                                            "App-Icon-4.png",
-                                            "App-Icon-5.png",
-                                            "App-Icon-6.png",
-                                            "App-Icon-7.png");
-       return () ->
-       {
+        final List<String> icons = Arrays.asList("App-Icon-1.png",
+                                                 "App-Icon-2.png",
+                                                 "App-Icon-3.png",
+                                                 "App-Icon-4.png",
+                                                 "App-Icon-5.png",
+                                                 "App-Icon-6.png",
+                                                 "App-Icon-7.png");
+        return () ->
+        {
             Image icon = new Image();
-            
+
             String image = Lists.oneOf(icons);
             URL resource = getResource("images/icons/" + image);
-            
+
             byte[] binary;
             try
             {
                 binary = toByteArray(resource);
             }
-            catch(IOException ex)
+            catch (IOException ex)
             {
                 throw new FailedAssertionException("Could not load Icon: " + image);
             }
-            
+
             icon.setImageType(ImageType.PNG)
                 .setData(binary);
-            
+
             return icon;
-       };
-       
+        };
+
     }
-    
+
     public static AlchemyGenerator<Image> profileImages()
     {
         List<String> images = Arrays.asList("Male-1.png",
@@ -98,14 +98,14 @@ public final class ImageGenerators
                                             "Female-4.png",
                                             "Female-5.png",
                                             "Female-6.png");
-        
+
         return () ->
         {
             Image profileImage = new Image();
-            
+
             String image = Lists.oneOf(images);
             URL resource = getResource("images/profiles/" + image);
-           
+
             byte[] binary;
             try
             {
@@ -116,10 +116,10 @@ public final class ImageGenerators
                 LOG.error("Failed to load Resource {}", resource, ex);
                 throw new FailedAssertionException("Could not load profile image: " + resource);
             }
-            
+
             profileImage.setImageType(ImageType.PNG)
-                .setData(binary);
-            
+                        .setData(binary);
+
             return profileImage;
         };
     }
@@ -130,8 +130,8 @@ public final class ImageGenerators
         URL url = classLoader.getResource(name);
 
         checkThat(url)
-            .usingMessage("Could not load URL Resource: " + name)
-            .is(notNull());
+                .usingMessage("Could not load URL Resource: " + name)
+                .is(notNull());
         return url;
     }
 

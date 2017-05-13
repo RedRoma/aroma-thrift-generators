@@ -64,10 +64,10 @@ public final class ChannelGenerators
     {
         return () ->
         {
-          return new SlackChannel()
-              .setChannelName(one(alphabeticString()))
-              .setDomainName(one(PeopleGenerators.popularEmailDomains()))
-              .setSlackToken(one(hexadecimalString(10)));
+            return new SlackChannel()
+                    .setChannelName(one(alphabeticString()))
+                    .setDomainName(one(PeopleGenerators.popularEmailDomains()))
+                    .setSlackToken(one(hexadecimalString(10)));
         };
     }
 
@@ -75,10 +75,10 @@ public final class ChannelGenerators
     {
         return () ->
         {
-          return new SlackUsername()
-              .setDomainName(one(popularEmailDomains()))
-              .setSlackToken(one(hexadecimalString(10)))
-              .setUsername(one(alphanumericString()));
+            return new SlackUsername()
+                    .setDomainName(one(popularEmailDomains()))
+                    .setSlackToken(one(hexadecimalString(10)))
+                    .setUsername(one(alphanumericString()));
         };
     }
 
@@ -87,8 +87,8 @@ public final class ChannelGenerators
         return () ->
         {
             return new Email()
-                .setEmailAddress(one(PeopleGenerators.emails()))
-                .setSubject(one(alphabeticString()));
+                    .setEmailAddress(one(PeopleGenerators.emails()))
+                    .setSubject(one(alphabeticString()));
         };
     }
 
@@ -100,18 +100,18 @@ public final class ChannelGenerators
 
             Endpoint endpoint = new Endpoint();
 
-            if(decider)
+            if (decider)
             {
                 TcpEndpoint tcp = new TcpEndpoint()
-                .setHostname(one(alphanumericString()))
-                .setPort(one(integers(80, 8080)));
+                        .setHostname(one(alphanumericString()))
+                        .setPort(one(integers(80, 8080)));
 
                 endpoint.setTcp(tcp);
             }
             else
             {
                 HttpThriftEndpoint http = new HttpThriftEndpoint()
-                .setUrl("http://" + one(popularEmailDomains()));
+                        .setUrl("http://" + one(popularEmailDomains()));
 
                 endpoint.setHttpThrift(http);
             }
@@ -125,7 +125,7 @@ public final class ChannelGenerators
         return () ->
         {
             return new CustomChannel()
-                .setEndpoint(one(endpoints()));
+                    .setEndpoint(one(endpoints()));
         };
     }
 
@@ -138,22 +138,22 @@ public final class ChannelGenerators
     {
         return pojos(AndroidDevice.class);
     }
-    
+
     public static AlchemyGenerator<WindowsPhoneDevice> windowsPhoneDevices()
     {
         return () -> new WindowsPhoneDevice();
     }
-    
+
     public static AlchemyGenerator<MobileDevice> mobileDevices()
     {
         AlchemyGenerator<Integer> randomSeeds = integers(1, 4);
-        
+
         return () ->
         {
             MobileDevice device = new MobileDevice();
-            
+
             int seed = randomSeeds.get();
-            
+
             switch (seed)
             {
                 case 1:
@@ -169,11 +169,11 @@ public final class ChannelGenerators
                     device.setIosDevice(one(iosDevices()));
                     break;
             }
-            
+
             return device;
         };
     }
-    
+
     public static AlchemyGenerator<AromaChannel> channels()
     {
 
@@ -183,7 +183,7 @@ public final class ChannelGenerators
 
             int number = one(integers(1, 8));
 
-            switch(number)
+            switch (number)
             {
                 case 1:
                     channel.setCustomChannel(one(customChannels()));

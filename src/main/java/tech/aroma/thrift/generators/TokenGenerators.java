@@ -54,14 +54,14 @@ public final class TokenGenerators
         return () ->
         {
             return new AuthenticationToken()
-                .setTokenId(one(uuids))
-                .setOwnerId(one(uuids))
-                .setOwnerName(one(alphabeticString()))
-                .setOrganizationId(one(uuids))
-                .setOrganizationName(one(alphabeticString()))
-                .setTokenType(enumValueOf(TokenType.class).get())
-                .setStatus(TokenStatus.ACTIVE)
-                .setTimeOfExpiration(futureInstants().get().toEpochMilli());
+                    .setTokenId(one(uuids))
+                    .setOwnerId(one(uuids))
+                    .setOwnerName(one(alphabeticString()))
+                    .setOrganizationId(one(uuids))
+                    .setOrganizationName(one(alphabeticString()))
+                    .setTokenType(enumValueOf(TokenType.class).get())
+                    .setStatus(TokenStatus.ACTIVE)
+                    .setTimeOfExpiration(futureInstants().get().toEpochMilli());
         };
     }
 
@@ -70,12 +70,12 @@ public final class TokenGenerators
         return () ->
         {
             return new ApplicationToken()
-                .setApplicationId(one(uuids))
-                .setApplicationName(one(alphabeticString()))
-                .setOrganization(one(alphabeticString()))
-                .setTokenId(one(uuids))
-                .setStatus(TokenStatus.ACTIVE)
-                .setTimeOfExpiration(futureInstants().get().toEpochMilli());
+                    .setApplicationId(one(uuids))
+                    .setApplicationName(one(alphabeticString()))
+                    .setOrganization(one(alphabeticString()))
+                    .setTokenId(one(uuids))
+                    .setStatus(TokenStatus.ACTIVE)
+                    .setTimeOfExpiration(futureInstants().get().toEpochMilli());
         };
     }
 
@@ -84,11 +84,11 @@ public final class TokenGenerators
         return () ->
         {
             return new UserToken()
-                .setUserId(one(uuids))
-                .setTokenId(one(uuids))
-                .setOrganization(one(alphabeticString()))
-                .setStatus(TokenStatus.ACTIVE)
-                .setTimeOfExpiration(futureInstants().get().toEpochMilli());
+                    .setUserId(one(uuids))
+                    .setTokenId(one(uuids))
+                    .setOrganization(one(alphabeticString()))
+                    .setStatus(TokenStatus.ACTIVE)
+                    .setTimeOfExpiration(futureInstants().get().toEpochMilli());
         };
     }
 

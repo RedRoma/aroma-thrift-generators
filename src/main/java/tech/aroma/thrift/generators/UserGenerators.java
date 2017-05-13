@@ -48,9 +48,7 @@ public final class UserGenerators
     {
         return () ->
         {
-            return users().get()
-                .setProfileImage(one(profileImages()));
-
+            return users().get().setProfileImage(one(profileImages()));
         };
     }
 
@@ -58,13 +56,12 @@ public final class UserGenerators
     {
         return () ->
         {
-            return new User()
-                .setEmail(one(emails()))
-                .setUserId(one(uuids))
-                .setName(one(names()))
-                .setFirstName(one(names()))
-                .setMiddleName(one(names()))
-                .setLastName(one(names()));
+            return new User().setEmail(one(emails()))
+                             .setUserId(one(uuids))
+                             .setName(one(names()))
+                             .setFirstName(one(names()))
+                             .setMiddleName(one(names()))
+                             .setLastName(one(names()));
         };
     }
 

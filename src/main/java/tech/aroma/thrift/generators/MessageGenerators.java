@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
- 
+
 package tech.aroma.thrift.generators;
 
 
@@ -35,11 +35,10 @@ import static tech.sirwellington.alchemy.generator.StringGenerators.alphanumeric
 import static tech.sirwellington.alchemy.generator.StringGenerators.uuids;
 
 /**
- *
  * @author SirWellington
  */
 @NonInstantiable
-public final class MessageGenerators 
+public final class MessageGenerators
 {
     private final static Logger LOG = LoggerFactory.getLogger(MessageGenerators.class);
 
@@ -47,22 +46,21 @@ public final class MessageGenerators
     {
         throw new IllegalAccessException("Cannot instantiate");
     }
-    
+
     public static AlchemyGenerator<Message> messages()
     {
         return () ->
         {
             return new Message()
-                .setTitle(one(alphabeticString(MAX_TITLE_LENGTH)))
-                .setBody(one(alphabeticString(MAX_CHARACTERS_IN_BODY)))
-                .setDeviceName(one(alphabeticString(12)))
-                .setHostname(one(alphanumericString()))
-                .setUrgency(one(enumValueOf(Urgency.class)))
-                .setTimeMessageReceived(one(pastDates()).getTime())
-                .setApplicationId(one(uuids))
-                .setApplicationName(one(alphabeticString(15)))
-                .setMessageId(one(uuids))
-                ;
+                    .setTitle(one(alphabeticString(MAX_TITLE_LENGTH)))
+                    .setBody(one(alphabeticString(MAX_CHARACTERS_IN_BODY)))
+                    .setDeviceName(one(alphabeticString(12)))
+                    .setHostname(one(alphanumericString()))
+                    .setUrgency(one(enumValueOf(Urgency.class)))
+                    .setTimeMessageReceived(one(pastDates()).getTime())
+                    .setApplicationId(one(uuids))
+                    .setApplicationName(one(alphabeticString(15)))
+                    .setMessageId(one(uuids));
         };
     }
 

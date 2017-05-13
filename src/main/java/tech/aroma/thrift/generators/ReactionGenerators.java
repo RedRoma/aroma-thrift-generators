@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
- 
+
 package tech.aroma.thrift.generators;
 
 
 import java.util.List;
 import java.util.Set;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sir.wellington.alchemy.collections.lists.Lists;
@@ -62,11 +63,10 @@ import static tech.sirwellington.alchemy.generator.StringGenerators.alphabeticSt
 import static tech.sirwellington.alchemy.generator.StringGenerators.uuids;
 
 /**
- *
  * @author SirWellington
  */
 @NonInstantiable
-public final class ReactionGenerators 
+public final class ReactionGenerators
 {
     private final static Logger LOG = LoggerFactory.getLogger(ReactionGenerators.class);
 
@@ -74,29 +74,29 @@ public final class ReactionGenerators
     {
         throw new IllegalAccessException("Cannot instantiate");
     }
-    
-    
-    public static AlchemyGenerator<AromaMatcher> matchers() 
+
+
+    public static AlchemyGenerator<AromaMatcher> matchers()
     {
         return () ->
         {
             AromaMatcher matcher = new AromaMatcher();
-            
+
             int random = one(integers(0, 14));
             String string = one(alphabeticString());
             String id = one(uuids);
-            
+
             int numberOfUrgencies = one(integers(1, 4));
             AlchemyGenerator<Urgency> urgencyGenerator = enumValueOf(Urgency.class);
             Set<Urgency> urgencies = Sets.toSet(listOf(urgencyGenerator, numberOfUrgencies));
-            
-            switch(random)
+
+            switch (random)
             {
-                case 0 :
+                case 0:
                     matcher.setAll(new MatcherAll());
                     break;
-                case 1 :
-                    matcher.setApplicationIs(new MatcherApplicationIs(id));;
+                case 1:
+                    matcher.setApplicationIs(new MatcherApplicationIs(id));
                     break;
                 case 2:
                     matcher.setApplicationIsNot(new MatcherApplicationIsNot(id));
@@ -110,7 +110,7 @@ public final class ReactionGenerators
                 case 5:
                     matcher.setBodyIs(new MatcherBodyIs(string));
                     break;
-                case 6 :
+                case 6:
                     matcher.setHostnameContains(new MatcherHostnameContains(string));
                     break;
                 case 7:
@@ -134,36 +134,36 @@ public final class ReactionGenerators
                 case 13:
                     matcher.setUrgencyEquals(new MatcherUrgencyIs(urgencies));
                     break;
-                default :
+                default:
                     matcher.setAll(new MatcherAll());
                     break;
             }
-            
-            
+
+
             return matcher;
         };
     }
 
-    
-    public static AlchemyGenerator<AromaAction> actions() 
+
+    public static AlchemyGenerator<AromaAction> actions()
     {
         return () ->
         {
-            
+
             AromaAction action = new AromaAction();
-            
+
             String string = one(alphabeticString());
             String url = one(NetworkGenerators.httpUrls()).toString();
             String id = one(uuids);
-            
+
             int random = one(integers(0, 10));
-            
-            switch(random)
+
+            switch (random)
             {
-                case 0 :
+                case 0:
                     action.setDontStoreMessage(new ActionDontStoreMessage());
                     break;
-                case 1 :
+                case 1:
                     action.setForwardToSlackChannel(pojos(ActionForwardToSlackChannel.class).get());
                     break;
                 case 2:
@@ -178,15 +178,15 @@ public final class ReactionGenerators
                 case 5:
                     action.setForwardToGitter(new ActionForwardToGitter(url));
                     break;
-                default :
+                default:
                     action.setResponseWithMessage(new ActionRespondWithMessage(string));
                     break;
             }
-            
+
             return action;
         };
     }
-    
+
     public static AlchemyGenerator<Reaction> reactions()
     {
         return () ->
@@ -194,12 +194,12 @@ public final class ReactionGenerators
             List<AromaMatcher> matchers = listOf(matchers());
             List<AromaAction> actions = listOf(actions());
             String name = one(alphabeticString());
-            
+
             return new Reaction()
-                .setMatchers(matchers)
-                .setActions(actions)
-                .setName(name);
+                    .setMatchers(matchers)
+                    .setActions(actions)
+                    .setName(name);
         };
     }
-    
+
 }

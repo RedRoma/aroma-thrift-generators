@@ -17,6 +17,7 @@
 package tech.aroma.thrift.generators;
 
 import java.time.Instant;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import tech.aroma.thrift.events.ApplicationDeleted;
@@ -104,11 +105,11 @@ public final class EventGenerators
             AlchemyGenerator<Long> timestamps = () -> pastInstants.get().toEpochMilli();
 
             return new Event()
-                .setTimestamp(one(timestamps))
-                .setEventType(one(eventTypes()))
-                .setEventId(one(uuids))
-                .setUserIdOfActor(one(uuids))
-                .setApplicationId(one(uuids));
+                    .setTimestamp(one(timestamps))
+                    .setEventType(one(eventTypes()))
+                    .setEventId(one(uuids))
+                    .setUserIdOfActor(one(uuids))
+                    .setApplicationId(one(uuids));
 
         };
     }
