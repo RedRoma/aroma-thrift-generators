@@ -74,6 +74,7 @@ public final class ApplicationGenerators
 
             return new Application()
                     .setApplicationId(one(uuids))
+                    .setOrganizationId(one(uuids))
                     .setName(names().get())
                     .setApplicationIconMediaId(one(uuids))
                     .setProgrammingLanguage(one(languages()))
