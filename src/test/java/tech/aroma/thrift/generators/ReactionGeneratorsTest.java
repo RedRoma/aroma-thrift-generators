@@ -21,28 +21,7 @@ import java.util.UUID;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import tech.aroma.thrift.reactions.ActionDontStoreMessage;
-import tech.aroma.thrift.reactions.ActionForwardToGitter;
-import tech.aroma.thrift.reactions.ActionForwardToSlackChannel;
-import tech.aroma.thrift.reactions.ActionForwardToSlackUser;
-import tech.aroma.thrift.reactions.ActionForwardToUsers;
-import tech.aroma.thrift.reactions.ActionRespondWithMessage;
-import tech.aroma.thrift.reactions.ActionSkipInbox;
-import tech.aroma.thrift.reactions.AromaAction;
-import tech.aroma.thrift.reactions.AromaMatcher;
-import tech.aroma.thrift.reactions.MatcherApplicationIs;
-import tech.aroma.thrift.reactions.MatcherApplicationIsNot;
-import tech.aroma.thrift.reactions.MatcherBodyContains;
-import tech.aroma.thrift.reactions.MatcherBodyDoesNotContain;
-import tech.aroma.thrift.reactions.MatcherBodyIs;
-import tech.aroma.thrift.reactions.MatcherHostnameContains;
-import tech.aroma.thrift.reactions.MatcherHostnameDoesNotContain;
-import tech.aroma.thrift.reactions.MatcherHostnameIs;
-import tech.aroma.thrift.reactions.MatcherTitleContains;
-import tech.aroma.thrift.reactions.MatcherTitleDoesNotContain;
-import tech.aroma.thrift.reactions.MatcherTitleIs;
-import tech.aroma.thrift.reactions.MatcherTitleIsNot;
-import tech.aroma.thrift.reactions.Reaction;
+import tech.aroma.thrift.reactions.*;
 import tech.sirwellington.alchemy.arguments.AlchemyAssertion;
 import tech.sirwellington.alchemy.arguments.FailedAssertionException;
 import tech.sirwellington.alchemy.generator.AlchemyGenerator;
@@ -50,12 +29,12 @@ import tech.sirwellington.alchemy.test.junit.runners.AlchemyTestRunner;
 import tech.sirwellington.alchemy.test.junit.runners.Repeat;
 
 import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
-import static tech.sirwellington.alchemy.arguments.Arguments.checkThat;
+import static org.junit.Assert.assertThat;
+import static tech.sirwellington.alchemy.arguments.Arguments.*;
 import static tech.sirwellington.alchemy.arguments.assertions.Assertions.notNull;
 import static tech.sirwellington.alchemy.arguments.assertions.BooleanAssertions.trueStatement;
 import static tech.sirwellington.alchemy.arguments.assertions.CollectionAssertions.nonEmptyList;
-import static tech.sirwellington.alchemy.arguments.assertions.StringAssertions.nonEmptyString;
+import static tech.sirwellington.alchemy.arguments.assertions.StringAssertions.*;
 
 /**
  * @author SirWellington

@@ -23,28 +23,18 @@ import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import tech.aroma.thrift.channels.AndroidDevice;
-import tech.aroma.thrift.channels.AromaChannel;
-import tech.aroma.thrift.channels.CustomChannel;
-import tech.aroma.thrift.channels.Email;
-import tech.aroma.thrift.channels.IOSDevice;
-import tech.aroma.thrift.channels.MobileDevice;
-import tech.aroma.thrift.channels.SlackChannel;
-import tech.aroma.thrift.channels.SlackUsername;
-import tech.aroma.thrift.channels.WindowsPhoneDevice;
+import tech.aroma.thrift.channels.*;
 import tech.aroma.thrift.endpoint.Endpoint;
 import tech.sirwellington.alchemy.generator.AlchemyGenerator;
-import tech.sirwellington.alchemy.test.junit.runners.AlchemyTestRunner;
-import tech.sirwellington.alchemy.test.junit.runners.DontRepeat;
-import tech.sirwellington.alchemy.test.junit.runners.GenerateInteger;
-import tech.sirwellington.alchemy.test.junit.runners.Repeat;
+import tech.sirwellington.alchemy.test.junit.runners.*;
 
 import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
-import static tech.sirwellington.alchemy.arguments.Arguments.checkThat;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
+import static tech.sirwellington.alchemy.arguments.Arguments.*;
 import static tech.sirwellington.alchemy.arguments.assertions.PeopleAssertions.validEmailAddress;
 import static tech.sirwellington.alchemy.generator.CollectionGenerators.listOf;
-import static tech.sirwellington.alchemy.test.junit.ThrowableAssertion.assertThrows;
+import static tech.sirwellington.alchemy.test.junit.ThrowableAssertion.*;
 import static tech.sirwellington.alchemy.test.junit.runners.GenerateInteger.Type.RANGE;
 
 /**
