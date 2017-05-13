@@ -18,6 +18,7 @@ package tech.aroma.thrift.generators;
 
 import java.time.Instant;
 import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -43,22 +44,21 @@ import static tech.sirwellington.alchemy.test.junit.ThrowableAssertion.assertThr
 import static tech.sirwellington.alchemy.test.junit.runners.GenerateInteger.Type.RANGE;
 
 /**
- *
  * @author SirWellington
  */
 @Repeat(100)
 @RunWith(AlchemyTestRunner.class)
-public class ApplicationGeneratorsTest 
+public class ApplicationGeneratorsTest
 {
 
     @GenerateInteger(value = RANGE, min = 10, max = 100)
     private int size;
-    
+
     @Before
     public void setUp() throws Exception
     {
     }
-    
+
     @DontRepeat
     @Test
     public void testCannotInstantiate()
@@ -72,16 +72,16 @@ public class ApplicationGeneratorsTest
     {
         AlchemyGenerator<Long> generator = ApplicationGenerators.pastTimes();
         assertThat(generator, notNullValue());
-        
+
         long result = generator.get();
         checkPastTime(result);
-        
-        for(int i = 0; i < size; ++i)
+
+        for (int i = 0; i < size; ++i)
         {
             result = generator.get();
             checkPastTime(result);
         }
-        
+
     }
 
     @Test
@@ -89,14 +89,14 @@ public class ApplicationGeneratorsTest
     {
         AlchemyGenerator<ProgrammingLanguage> generator = ApplicationGenerators.languages();
         assertThat(generator, notNullValue());
-        
+
         ProgrammingLanguage result = generator.get();
         checkLanguage(result);
-        
+
         List<ProgrammingLanguage> languages = listOf(generator, size);
         assertThat(languages, not(empty()));
         assertThat(languages.size(), is(size));
-        
+
         languages.forEach(this::checkLanguage);
     }
 
@@ -105,10 +105,10 @@ public class ApplicationGeneratorsTest
     {
         AlchemyGenerator<Application> generator = ApplicationGenerators.applications();
         assertThat(generator, notNullValue());
-        
+
         Application app = generator.get();
         checkApp(app);
-        
+
         List<Application> apps = listOf(generator, size);
         assertThat(apps, not(empty()));
         assertThat(apps.size(), is(size));
@@ -118,7 +118,7 @@ public class ApplicationGeneratorsTest
     private void checkPastTime(long time)
     {
         checkThat(Instant.ofEpochMilli(time))
-            .is(inThePast());
+                .is(inThePast());
     }
 
     private void checkLanguage(ProgrammingLanguage result)
@@ -133,10 +133,10 @@ public class ApplicationGeneratorsTest
     {
         AlchemyGenerator<Application> generator = ApplicationGenerators.applicationsWithIcons();
         assertThat(generator, notNullValue());
-        
+
         Application app = generator.get();
         checkAppWithIcon(app);
-        
+
         List<Application> apps = listOf(generator, size);
         assertThat(apps, not(empty()));
         assertThat(apps.size(), is(size));
@@ -154,19 +154,19 @@ public class ApplicationGeneratorsTest
         checkThat(app.applicationIconMediaId).is(validUUID());
 
     }
-    
-    
+
+
     private void checkAppWithIcon(Application app)
     {
         checkApp(app);
-        
+
         checkThat(app.icon)
-            .is(notNull());
-        
+                .is(notNull());
+
         checkThat(app.icon.getData())
-            .is(notNull());
-        
+                .is(notNull());
+
         checkThat(app.icon.getData().length)
-            .is(greaterThan(0));
+                .is(greaterThan(0));
     }
 }

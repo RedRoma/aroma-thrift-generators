@@ -17,6 +17,7 @@
 package tech.aroma.thrift.generators;
 
 import java.util.List;
+
 import junit.framework.AssertionFailedError;
 import org.junit.Before;
 import org.junit.Test;
@@ -43,7 +44,6 @@ import static tech.sirwellington.alchemy.test.junit.ThrowableAssertion.assertThr
 import static tech.sirwellington.alchemy.test.junit.runners.GenerateInteger.Type.RANGE;
 
 /**
- *
  * @author SirWellington
  */
 @Repeat(100)
@@ -79,8 +79,8 @@ public class UserGeneratorsTest
 
         List<User> users = listOf(generator, count);
         checkThat(users)
-            .is(nonEmptyList())
-            .is(collectionOfSize(count));
+                .is(nonEmptyList())
+                .is(collectionOfSize(count));
 
         users.forEach(this::checkUserWithProfileImage);
     }
@@ -96,8 +96,8 @@ public class UserGeneratorsTest
 
         List<User> users = listOf(generator, count);
         checkThat(users)
-            .is(nonEmptyList())
-            .is(collectionOfSize(count));
+                .is(nonEmptyList())
+                .is(collectionOfSize(count));
 
         users.forEach(this::checkUserWithoutProfileImage);
     }
@@ -106,8 +106,8 @@ public class UserGeneratorsTest
     {
         checkUserWithoutProfileImage(user);
         checkThat(user.profileImage)
-            .throwing(AssertionFailedError.class)
-            .is(notNull());
+                .throwing(AssertionFailedError.class)
+                .is(notNull());
     }
 
     private void checkUserWithoutProfileImage(User user)
@@ -115,7 +115,7 @@ public class UserGeneratorsTest
         checkThat(user).is(notNull());
         checkThat(user.userId).is(validUUID());
         checkThat(user.name, user.firstName, user.middleName, user.lastName)
-            .are(nonEmptyString());
+                .are(nonEmptyString());
         checkThat(user.roles).is(nonEmptySet());
         checkThat(user.email).is(validEmailAddress());
     }

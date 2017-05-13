@@ -18,6 +18,7 @@ package tech.aroma.thrift.generators;
 
 import java.time.Instant;
 import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -46,21 +47,20 @@ import static tech.sirwellington.alchemy.test.junit.ThrowableAssertion.assertThr
 import static tech.sirwellington.alchemy.test.junit.runners.GenerateInteger.Type.RANGE;
 
 /**
- *
  * @author SirWellington
  */
 @Repeat(100)
 @RunWith(AlchemyTestRunner.class)
-public class TokenGeneratorsTest 
+public class TokenGeneratorsTest
 {
 
     @GenerateInteger(value = RANGE, min = 5, max = 50)
     private int size;
-    
+
     @Before
     public void setUp() throws Exception
     {
-        
+
     }
 
     @DontRepeat
@@ -69,16 +69,16 @@ public class TokenGeneratorsTest
     {
         assertThrows(() -> new TokenGenerators());
     }
-    
+
     @Test
     public void testAuthenticationTokens()
     {
         AlchemyGenerator<AuthenticationToken> generator = TokenGenerators.authenticationTokens();
         assertThat(generator, notNullValue());
-        
+
         AuthenticationToken token = generator.get();
         assertToken(token);
-        
+
         List<AuthenticationToken> tokens = listOf(generator, size);
         assertThat(tokens.size(), is(size));
         assertThat(toSet(tokens).size(), is(size));
@@ -90,10 +90,10 @@ public class TokenGeneratorsTest
     {
         AlchemyGenerator<ApplicationToken> generator = TokenGenerators.applicationTokens();
         assertThat(generator, notNullValue());
-        
+
         ApplicationToken token = generator.get();
         assertToken(token);
-        
+
         List<ApplicationToken> tokens = listOf(generator, size);
         assertThat(toSet(tokens).size(), is(size));
         tokens.forEach(this::assertToken);
@@ -104,10 +104,10 @@ public class TokenGeneratorsTest
     {
         AlchemyGenerator<UserToken> generator = TokenGenerators.userTokens();
         assertThat(generator, notNullValue());
-        
+
         UserToken token = generator.get();
         assertToken(token);
-        
+
         List<UserToken> tokens = listOf(generator, size);
         assertThat(toSet(tokens).size(), is(size));
         tokens.forEach(this::assertToken);
@@ -117,17 +117,17 @@ public class TokenGeneratorsTest
     {
         assertThat(token, notNullValue());
         checkThat(token.tokenId, token.ownerId, token.organizationId)
-            .are(validUUID());
+                .are(validUUID());
 
         checkThat(token.ownerName, token.organizationName)
-            .are(nonEmptyString());
+                .are(nonEmptyString());
 
         checkThat(Instant.ofEpochMilli(token.timeOfExpiration))
-            .is(inTheFuture());
+                .is(inTheFuture());
 
         checkThat(token.status)
-            .is(notNull())
-            .is(equalTo(TokenStatus.ACTIVE));
+                .is(notNull())
+                .is(equalTo(TokenStatus.ACTIVE));
     }
 
     private void assertToken(ApplicationToken token)
@@ -135,14 +135,14 @@ public class TokenGeneratorsTest
         assertThat(token, notNullValue());
 
         checkThat(token.tokenId, token.applicationId)
-            .are(validUUID());
+                .are(validUUID());
 
         checkThat(Instant.ofEpochMilli(token.timeOfExpiration))
-            .is(inTheFuture());
+                .is(inTheFuture());
 
         checkThat(token.status)
-            .is(notNull())
-            .is(equalTo(TokenStatus.ACTIVE));
+                .is(notNull())
+                .is(equalTo(TokenStatus.ACTIVE));
     }
 
     private void assertToken(UserToken token)
@@ -150,14 +150,14 @@ public class TokenGeneratorsTest
         assertThat(token, notNullValue());
 
         checkThat(token.tokenId, token.userId)
-            .are(validUUID());
+                .are(validUUID());
 
         checkThat(Instant.ofEpochMilli(token.timeOfExpiration))
-            .is(inTheFuture());
+                .is(inTheFuture());
 
         checkThat(token.status)
-            .is(notNull())
-            .is(equalTo(TokenStatus.ACTIVE));
+                .is(notNull())
+                .is(equalTo(TokenStatus.ACTIVE));
     }
 
 }

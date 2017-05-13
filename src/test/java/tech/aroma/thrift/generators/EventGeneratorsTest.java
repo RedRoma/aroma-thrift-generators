@@ -17,6 +17,7 @@
 package tech.aroma.thrift.generators;
 
 import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,7 +40,6 @@ import static tech.sirwellington.alchemy.test.junit.ThrowableAssertion.assertThr
 import static tech.sirwellington.alchemy.test.junit.runners.GenerateInteger.Type.RANGE;
 
 /**
- *
  * @author SirWellington
  */
 @Repeat(100)
@@ -105,11 +105,11 @@ public class EventGeneratorsTest
     private void assertEvent(Event result)
     {
         assertThat(result, notNullValue());
-        
+
         checkThat(result.eventId)
-            .is(nonEmptyString())
-            .is(validUUID());
-        
+                .is(nonEmptyString())
+                .is(validUUID());
+
         assertEventType(result.eventType);
     }
 

@@ -17,6 +17,7 @@
 package tech.aroma.thrift.generators;
 
 import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,7 +40,6 @@ import static tech.sirwellington.alchemy.test.junit.ThrowableAssertion.assertThr
 import static tech.sirwellington.alchemy.test.junit.runners.GenerateInteger.Type.RANGE;
 
 /**
- *
  * @author SirWellington
  */
 @Repeat(10)
@@ -73,7 +73,7 @@ public class ImageGeneratorsTest
     public void testCannotInstantiate() throws Exception
     {
         assertThrows(() -> new ImageGenerators())
-            .isInstanceOf(IllegalAccessException.class);
+                .isInstanceOf(IllegalAccessException.class);
     }
 
     @Test
@@ -88,8 +88,8 @@ public class ImageGeneratorsTest
         List<Image> images = listOf(generator, count);
 
         checkThat(images)
-            .is(nonEmptyList())
-            .is(collectionOfSize(count));
+                .is(nonEmptyList())
+                .is(collectionOfSize(count));
 
         images.forEach(this::checkImage);
     }
@@ -106,8 +106,8 @@ public class ImageGeneratorsTest
         List<Image> images = listOf(generator, count);
 
         checkThat(images)
-            .is(nonEmptyList())
-            .is(collectionOfSize(count));
+                .is(nonEmptyList())
+                .is(collectionOfSize(count));
 
         images.forEach(this::checkImage);
     }
@@ -117,7 +117,7 @@ public class ImageGeneratorsTest
         checkThat(image).is(notNull());
 
         checkThat(image.data)
-            .are(notNull());
+                .are(notNull());
 
         byte[] binary = image.data.array();
         checkThat(binary).is(notNull());

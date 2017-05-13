@@ -17,6 +17,7 @@
 package tech.aroma.thrift.generators;
 
 import java.util.List;
+
 import junit.framework.AssertionFailedError;
 import org.hamcrest.Matchers;
 import org.junit.Before;
@@ -51,23 +52,23 @@ import static tech.sirwellington.alchemy.test.junit.runners.GenerateInteger.Type
  */
 @Repeat(100)
 @RunWith(AlchemyTestRunner.class)
-public class ChannelGeneratorsTest 
+public class ChannelGeneratorsTest
 {
-    
+
     @GenerateInteger(value = RANGE, min = 5, max = 50)
     private int size;
 
     @Before
     public void setUp() throws Exception
     {
-        
+
         setupData();
     }
 
 
     private void setupData() throws Exception
     {
-        
+
     }
 
     @DontRepeat
@@ -76,16 +77,16 @@ public class ChannelGeneratorsTest
     {
         assertThrows(() -> new ChannelGenerators());
     }
-    
+
     @Test
     public void testSlackChannels()
     {
         AlchemyGenerator<SlackChannel> generator = ChannelGenerators.slackChannels();
         assertThat(generator, notNullValue());
-        
+
         SlackChannel channel = generator.get();
         assertSlackChannel(channel);
-        
+
         List<SlackChannel> channels = listOf(generator, size);
         assertThat(channels.size(), is(size));
         channels.forEach(this::assertSlackChannel);
@@ -96,10 +97,10 @@ public class ChannelGeneratorsTest
     {
         AlchemyGenerator<SlackUsername> generator = ChannelGenerators.slackUsernames();
         assertThat(generator, notNullValue());
-        
+
         SlackUsername channel = generator.get();
         assertSlackUsername(channel);
-        
+
         List<SlackUsername> channels = listOf(generator, size);
         assertThat(channels.size(), is(size));
         channels.forEach(this::assertSlackUsername);
@@ -110,10 +111,10 @@ public class ChannelGeneratorsTest
     {
         AlchemyGenerator<Email> generator = ChannelGenerators.emails();
         assertThat(generator, notNullValue());
-        
+
         Email result = generator.get();
         assertEmail(result);
-        
+
         List<Email> emails = listOf(generator, size);
         assertThat(emails.size(), is(size));
         emails.forEach(this::assertEmail);
@@ -124,10 +125,10 @@ public class ChannelGeneratorsTest
     {
         AlchemyGenerator<Endpoint> generator = ChannelGenerators.endpoints();
         assertThat(generator, notNullValue());
-        
+
         Endpoint result = generator.get();
         assertEndpoint(result);
-        
+
         List<Endpoint> endpoints = listOf(generator, size);
         assertThat(endpoints.size(), is(size));
         endpoints.forEach(this::assertEndpoint);
@@ -138,10 +139,10 @@ public class ChannelGeneratorsTest
     {
         AlchemyGenerator<CustomChannel> generator = ChannelGenerators.customChannels();
         assertThat(generator, notNullValue());
-        
+
         CustomChannel result = generator.get();
         assertCustomChannel(result);
-        
+
         List<CustomChannel> channels = listOf(generator, size);
         assertThat(channels.size(), is(size));
         channels.forEach(this::assertCustomChannel);
@@ -152,10 +153,10 @@ public class ChannelGeneratorsTest
     {
         AlchemyGenerator<IOSDevice> generator = ChannelGenerators.iosDevices();
         assertThat(generator, notNullValue());
-        
+
         IOSDevice result = generator.get();
         assertIosDevice(result);
-        
+
         List<IOSDevice> devices = listOf(generator, size);
         assertThat(devices.size(), is(size));
         devices.forEach(this::assertIosDevice);
@@ -166,25 +167,25 @@ public class ChannelGeneratorsTest
     {
         AlchemyGenerator<AndroidDevice> generator = ChannelGenerators.androidDevices();
         assertThat(generator, notNullValue());
-        
+
         AndroidDevice result = generator.get();
         assertAndroidDevice(result);
-        
+
         List<AndroidDevice> devices = listOf(generator, size);
         assertThat(devices.size(), is(size));
         devices.forEach(this::assertAndroidDevice);
     }
-    
-    
+
+
     @Test
     public void testWindowsPhoneDevices()
     {
         AlchemyGenerator<WindowsPhoneDevice> generator = ChannelGenerators.windowsPhoneDevices();
         assertThat(generator, notNullValue());
-        
+
         WindowsPhoneDevice result = generator.get();
         assertWindowsPhoneDevice(result);
-        
+
         List<WindowsPhoneDevice> devices = listOf(generator, size);
         assertThat(devices, not(empty()));
         assertThat(devices.size(), is(size));
@@ -222,10 +223,10 @@ public class ChannelGeneratorsTest
     {
         AlchemyGenerator<AromaChannel> generator = ChannelGenerators.channels();
         assertThat(generator, notNullValue());
-        
+
         AromaChannel channel = generator.get();
         assertChannel(channel);
-        
+
         List<AromaChannel> channels = listOf(generator, size);
         assertThat(channels.size(), is(size));
         channels.forEach(this::assertChannel);
@@ -250,10 +251,10 @@ public class ChannelGeneratorsTest
     private void assertEmail(Email email)
     {
         assertThat(email, notNullValue());
-        
+
         checkThat(email.emailAddress)
-            .throwing(AssertionFailedError.class)
-            .is(validEmailAddress());
+                .throwing(AssertionFailedError.class)
+                .is(validEmailAddress());
     }
 
     private void assertEndpoint(Endpoint result)
@@ -285,7 +286,7 @@ public class ChannelGeneratorsTest
     {
         assertThat(channel, notNullValue());
         assertThat(channel.isSet(), is(true));
-        
+
         if (channel.isSetAndroidDevice())
         {
             assertAndroidDevice(channel.getAndroidDevice());

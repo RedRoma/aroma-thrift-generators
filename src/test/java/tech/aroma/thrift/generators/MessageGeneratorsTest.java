@@ -17,6 +17,7 @@
 package tech.aroma.thrift.generators;
 
 import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,7 +38,6 @@ import static tech.sirwellington.alchemy.generator.CollectionGenerators.listOf;
 import static tech.sirwellington.alchemy.test.junit.ThrowableAssertion.assertThrows;
 
 /**
- *
  * @author SirWellington
  */
 @Repeat(100)
@@ -57,7 +57,7 @@ public class MessageGeneratorsTest
     {
         assertThrows(() -> new MessageGenerators());
     }
-    
+
     @Test
     public void testMessages()
     {
@@ -86,10 +86,10 @@ public class MessageGeneratorsTest
         checkThat(message.messageId).is(validUUID());
 
         checkThat(message.title)
-            .is(stringWithLengthLessThanOrEqualTo(MAX_TITLE_LENGTH));
+                .is(stringWithLengthLessThanOrEqualTo(MAX_TITLE_LENGTH));
 
         checkThat(message.body)
-            .is(stringWithLengthLessThanOrEqualTo(MAX_CHARACTERS_IN_BODY));
+                .is(stringWithLengthLessThanOrEqualTo(MAX_CHARACTERS_IN_BODY));
     }
 
 }
