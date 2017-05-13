@@ -18,11 +18,7 @@ package tech.aroma.thrift.generators;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import tech.aroma.thrift.authentication.ApplicationToken;
-import tech.aroma.thrift.authentication.AuthenticationToken;
-import tech.aroma.thrift.authentication.TokenStatus;
-import tech.aroma.thrift.authentication.TokenType;
-import tech.aroma.thrift.authentication.UserToken;
+import tech.aroma.thrift.authentication.*;
 import tech.sirwellington.alchemy.annotations.access.NonInstantiable;
 import tech.sirwellington.alchemy.generator.AlchemyGenerator;
 

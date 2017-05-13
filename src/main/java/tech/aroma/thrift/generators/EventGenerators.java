@@ -20,16 +20,7 @@ import java.time.Instant;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import tech.aroma.thrift.events.ApplicationDeleted;
-import tech.aroma.thrift.events.ApplicationFollowed;
-import tech.aroma.thrift.events.ApplicationSentMessage;
-import tech.aroma.thrift.events.ApplicationTokenRegenerated;
-import tech.aroma.thrift.events.ApplicationTokenRenewed;
-import tech.aroma.thrift.events.Event;
-import tech.aroma.thrift.events.EventType;
-import tech.aroma.thrift.events.HealthCheckBackToNormal;
-import tech.aroma.thrift.events.HealthCheckFailed;
-import tech.aroma.thrift.events.OwnerAdded;
+import tech.aroma.thrift.events.*;
 import tech.sirwellington.alchemy.annotations.access.NonInstantiable;
 import tech.sirwellington.alchemy.generator.AlchemyGenerator;
 import tech.sirwellington.alchemy.generator.TimeGenerators;

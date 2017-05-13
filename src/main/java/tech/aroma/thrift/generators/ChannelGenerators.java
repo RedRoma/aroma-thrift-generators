@@ -20,18 +20,8 @@ package tech.aroma.thrift.generators;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import tech.aroma.thrift.channels.AndroidDevice;
-import tech.aroma.thrift.channels.AromaChannel;
-import tech.aroma.thrift.channels.CustomChannel;
-import tech.aroma.thrift.channels.Email;
-import tech.aroma.thrift.channels.IOSDevice;
-import tech.aroma.thrift.channels.MobileDevice;
-import tech.aroma.thrift.channels.SlackChannel;
-import tech.aroma.thrift.channels.SlackUsername;
-import tech.aroma.thrift.channels.WindowsPhoneDevice;
-import tech.aroma.thrift.endpoint.Endpoint;
-import tech.aroma.thrift.endpoint.HttpThriftEndpoint;
-import tech.aroma.thrift.endpoint.TcpEndpoint;
+import tech.aroma.thrift.channels.*;
+import tech.aroma.thrift.endpoint.*;
 import tech.sirwellington.alchemy.annotations.access.NonInstantiable;
 import tech.sirwellington.alchemy.generator.AlchemyGenerator;
 import tech.sirwellington.alchemy.generator.PeopleGenerators;
@@ -41,9 +31,7 @@ import static tech.sirwellington.alchemy.generator.BooleanGenerators.booleans;
 import static tech.sirwellington.alchemy.generator.NumberGenerators.integers;
 import static tech.sirwellington.alchemy.generator.ObjectGenerators.pojos;
 import static tech.sirwellington.alchemy.generator.PeopleGenerators.popularEmailDomains;
-import static tech.sirwellington.alchemy.generator.StringGenerators.alphabeticString;
-import static tech.sirwellington.alchemy.generator.StringGenerators.alphanumericString;
-import static tech.sirwellington.alchemy.generator.StringGenerators.hexadecimalString;
+import static tech.sirwellington.alchemy.generator.StringGenerators.*;
 
 /**
  * {@linkplain AlchemyGenerator Alchemy Generators} for {@link AromaChannel} types.

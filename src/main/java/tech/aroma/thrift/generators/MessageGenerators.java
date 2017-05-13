@@ -30,9 +30,7 @@ import static tech.aroma.thrift.application.service.ApplicationServiceConstants.
 import static tech.sirwellington.alchemy.generator.AlchemyGenerator.one;
 import static tech.sirwellington.alchemy.generator.DateGenerators.pastDates;
 import static tech.sirwellington.alchemy.generator.EnumGenerators.enumValueOf;
-import static tech.sirwellington.alchemy.generator.StringGenerators.alphabeticString;
-import static tech.sirwellington.alchemy.generator.StringGenerators.alphanumericString;
-import static tech.sirwellington.alchemy.generator.StringGenerators.uuids;
+import static tech.sirwellington.alchemy.generator.StringGenerators.*;
 
 /**
  * @author SirWellington
