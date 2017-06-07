@@ -53,7 +53,7 @@ public final class ChannelGenerators
         return () ->
         {
             return new SlackChannel()
-                    .setChannelName(one(alphabeticString()))
+                    .setChannelName(one(alphabeticStrings()))
                     .setDomainName(one(PeopleGenerators.popularEmailDomains()))
                     .setSlackToken(one(hexadecimalString(10)));
         };
@@ -66,7 +66,7 @@ public final class ChannelGenerators
             return new SlackUsername()
                     .setDomainName(one(popularEmailDomains()))
                     .setSlackToken(one(hexadecimalString(10)))
-                    .setUsername(one(alphanumericString()));
+                    .setUsername(one(alphanumericStrings()));
         };
     }
 
@@ -76,7 +76,7 @@ public final class ChannelGenerators
         {
             return new Email()
                     .setEmailAddress(one(PeopleGenerators.emails()))
-                    .setSubject(one(alphabeticString()));
+                    .setSubject(one(alphabeticStrings()));
         };
     }
 
@@ -91,7 +91,7 @@ public final class ChannelGenerators
             if (decider)
             {
                 TcpEndpoint tcp = new TcpEndpoint()
-                        .setHostname(one(alphanumericString()))
+                        .setHostname(one(alphanumericStrings()))
                         .setPort(one(integers(80, 8080)));
 
                 endpoint.setTcp(tcp);

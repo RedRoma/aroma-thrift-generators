@@ -50,14 +50,14 @@ public final class MessageGenerators
         return () ->
         {
             return new Message()
-                    .setTitle(one(alphabeticString(MAX_TITLE_LENGTH)))
-                    .setBody(one(alphabeticString(MAX_CHARACTERS_IN_BODY)))
-                    .setDeviceName(one(alphabeticString(12)))
-                    .setHostname(one(alphanumericString()))
+                    .setTitle(one(alphabeticStrings(MAX_TITLE_LENGTH)))
+                    .setBody(one(alphabeticStrings(MAX_CHARACTERS_IN_BODY)))
+                    .setDeviceName(one(alphabeticStrings(12)))
+                    .setHostname(one(alphanumericStrings()))
                     .setUrgency(one(enumValueOf(Urgency.class)))
                     .setTimeMessageReceived(one(pastDates()).getTime())
                     .setApplicationId(one(uuids))
-                    .setApplicationName(one(alphabeticString(15)))
+                    .setApplicationName(one(alphabeticStrings(15)))
                     .setMessageId(one(uuids));
         };
     }

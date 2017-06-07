@@ -24,7 +24,7 @@ import tech.sirwellington.alchemy.generator.AlchemyGenerator;
 
 import static tech.sirwellington.alchemy.generator.AlchemyGenerator.Get.one;
 import static tech.sirwellington.alchemy.generator.EnumGenerators.enumValueOf;
-import static tech.sirwellington.alchemy.generator.StringGenerators.alphabeticString;
+import static tech.sirwellington.alchemy.generator.StringGenerators.alphabeticStrings;
 import static tech.sirwellington.alchemy.generator.StringGenerators.uuids;
 import static tech.sirwellington.alchemy.generator.TimeGenerators.futureInstants;
 
@@ -52,9 +52,9 @@ public final class TokenGenerators
             return new AuthenticationToken()
                     .setTokenId(one(uuids))
                     .setOwnerId(one(uuids))
-                    .setOwnerName(one(alphabeticString()))
+                    .setOwnerName(one(alphabeticStrings()))
                     .setOrganizationId(one(uuids))
-                    .setOrganizationName(one(alphabeticString()))
+                    .setOrganizationName(one(alphabeticStrings()))
                     .setTokenType(enumValueOf(TokenType.class).get())
                     .setStatus(TokenStatus.ACTIVE)
                     .setTimeOfExpiration(futureInstants().get().toEpochMilli());
@@ -67,8 +67,8 @@ public final class TokenGenerators
         {
             return new ApplicationToken()
                     .setApplicationId(one(uuids))
-                    .setApplicationName(one(alphabeticString()))
-                    .setOrganization(one(alphabeticString()))
+                    .setApplicationName(one(alphabeticStrings()))
+                    .setOrganization(one(alphabeticStrings()))
                     .setTokenId(one(uuids))
                     .setStatus(TokenStatus.ACTIVE)
                     .setTimeOfExpiration(futureInstants().get().toEpochMilli());
@@ -82,7 +82,7 @@ public final class TokenGenerators
             return new UserToken()
                     .setUserId(one(uuids))
                     .setTokenId(one(uuids))
-                    .setOrganization(one(alphabeticString()))
+                    .setOrganization(one(alphabeticStrings()))
                     .setStatus(TokenStatus.ACTIVE)
                     .setTimeOfExpiration(futureInstants().get().toEpochMilli());
         };

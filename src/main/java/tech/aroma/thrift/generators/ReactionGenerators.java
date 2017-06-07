@@ -36,7 +36,7 @@ import static tech.sirwellington.alchemy.generator.CollectionGenerators.listOf;
 import static tech.sirwellington.alchemy.generator.EnumGenerators.enumValueOf;
 import static tech.sirwellington.alchemy.generator.NumberGenerators.integers;
 import static tech.sirwellington.alchemy.generator.ObjectGenerators.pojos;
-import static tech.sirwellington.alchemy.generator.StringGenerators.alphabeticString;
+import static tech.sirwellington.alchemy.generator.StringGenerators.alphabeticStrings;
 import static tech.sirwellington.alchemy.generator.StringGenerators.uuids;
 
 /**
@@ -60,7 +60,7 @@ public final class ReactionGenerators
             AromaMatcher matcher = new AromaMatcher();
 
             int random = one(integers(0, 14));
-            String string = one(alphabeticString());
+            String string = one(alphabeticStrings());
             String id = one(uuids);
 
             int numberOfUrgencies = one(integers(1, 4));
@@ -129,7 +129,7 @@ public final class ReactionGenerators
 
             AromaAction action = new AromaAction();
 
-            String string = one(alphabeticString());
+            String string = one(alphabeticStrings());
             String url = one(NetworkGenerators.httpUrls()).toString();
             String id = one(uuids);
 
@@ -170,7 +170,7 @@ public final class ReactionGenerators
         {
             List<AromaMatcher> matchers = listOf(matchers());
             List<AromaAction> actions = listOf(actions());
-            String name = one(alphabeticString());
+            String name = one(alphabeticStrings());
 
             return new Reaction()
                     .setMatchers(matchers)
