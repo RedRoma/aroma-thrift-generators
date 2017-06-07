@@ -23,7 +23,7 @@ import tech.sirwellington.alchemy.annotations.access.NonInstantiable;
 import tech.sirwellington.alchemy.generator.AlchemyGenerator;
 
 import static tech.aroma.thrift.generators.ImageGenerators.profileImages;
-import static tech.sirwellington.alchemy.generator.AlchemyGenerator.one;
+import static tech.sirwellington.alchemy.generator.AlchemyGenerator.Get.one;
 import static tech.sirwellington.alchemy.generator.PeopleGenerators.emails;
 import static tech.sirwellington.alchemy.generator.PeopleGenerators.names;
 import static tech.sirwellington.alchemy.generator.StringGenerators.uuids;
